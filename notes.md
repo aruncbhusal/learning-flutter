@@ -82,6 +82,8 @@ The course has given us a widget tree we can follow which goes like this:
 -   [Vecteezy](https://www.vecteezy.com/)
 -   [Canva](https://www.canva.com/)
 
+---
+
 ### **MiCard Business Card App**
 
 This project needs us to first clone a git repository as the skeleton project from which we'll build forward.
@@ -171,3 +173,155 @@ When working with card, we can make use of List Tile instead of simply using row
 > Documentation: [Divider class](https://api.flutter.dev/flutter/material/Divider-class.html)
 
 We can set this as a child of a SizedBox to get a 1px thick line that can be used to separate content visually.
+
+## Day 4
+
+### **Dicee: Dice Rolling App**
+
+> Like with other projects I had to clone the starting repository, but since older versions of sdk and jdk are incompatible, I create a new project for each and simply copy the relevant files instead.
+
+This project is meant to introduce us to adding functionality through Flutter rather than just design. It features two dice that we can roll.
+
+#### Content Overflow
+
+When we want to place a large content like an image into the screen, it can overflow out of the screen and cause red and black bars to appear to signify that. We need to be mindful of how large our content is when putting it onto the screen. We can change the height and width of images but that is a static way of managing content size.
+
+#### Expanded Widget
+
+> Documentation: [Expanded class](https://api.flutter.dev/flutter/widgets/Expanded-class.html)
+
+This is a simple way to dynamically adjust the size of content by taking as much space as available. It can only be used inside widgets like Row, Column, Flex. Multiple Expanded widgets can share the available space in a default 1:1 ratio, but we can change the `flex` property to change the proportion of any individual widget.
+
+#### Image Widget
+
+> Documentation: [Image class](https://api.flutter.dev/flutter/widgets/Image-class.html)
+
+The image class can be used to add an image from different sources. We can simply use the base `Image` constructor with an `ImageProvider` parameter, but we can also simply use methods like `Image.asset(..)` for asset images instead of `Image(image: AssetImage(..))`
+
+#### Button Widget
+
+> Documentation: [ButtonStyleButton class](https://api.flutter.dev/flutter/material/ButtonStyleButton-class.html)
+
+Buttons are used to prompt user tap/click and perform some action based on the tap/click. A button has an onPressed parameter which takes a voidCallback function which is analogous to an anonymous function, with no arguments and no returns.
+
+There are different types of buttons in Flutter, and the ones shown in the course have been deprecated and replaced since:
+
+-   **[Text Button](https://api.flutter.dev/flutter/material/TextButton-class.html):** _(Replaces FlatButton used in this project.)_ It is the most basic of buttons, with some padding and not much other change in appearance apart from functionality.
+-   **[Elevated Button](https://api.flutter.dev/flutter/material/ElevatedButton-class.html):** _(Replaces RaisedButton.)_ It has shadows and appears elevated with some change in other appearance.
+-   **[Outlined Button](https://api.flutter.dev/flutter/material/OutlinedButton-class.html):** _(Replaces outlineButton.)_ It has outline border but no fill color.
+-   **[Filled Button](https://api.flutter.dev/flutter/material/FilledButton-class.html):** It is filled with color but doesn't elevate when pressed.
+
+> We can follow [this official Material 3 design overview](https://m3.material.io/components/buttons/overview) for using buttons in designs.
+
+#### print function
+
+The print function is similar to how it is in other languages, it accepts a string that it prints to the console when triggered.
+
+#### Functions in Dart
+
+The concept of functions stays the same as with any other language, we have arguments, return types, etc. In Dart we also have named functions that we need to call later, and anonymous functions like the void callback that we don't need to call ourselves.
+
+#### Variables in Dart
+
+We can define variables in Dart using the `var` keyword. We need to be mindful about where we define our variables since changes made to a variable outside a function that is rerun are not reflected inside the function.
+
+For example, when Hot Reloading, the build function is re-executed but if the variable is defined/changed outside the function, the change isn't detected by the function during Hot Reload.
+
+We can perform string interpolation in Dart by simply using `$variableName` inside a string.
+
+> We can test dart code in the browser using [DartPad](https://dartpad.dev).
+
+#### Data Types in Dart
+
+Dart is a statically typed language. When we define a variable with a certain data type, it is locked to that data type. Some primitive data types are:
+
+-   A `String` is written inside single code by convention
+-   An `int` is the normal integer type
+-   A `double` is a floating point type
+-   A `bool` is the boolean type
+
+Dart also has a `dynamic` data type that a variable is assigned when we don't initialize it at definition, enabling it to hold data of any type.
+
+We can define a variable in Dart by using `var` as well as specific data types like `int a`, `String b` or even `dynamic c`. It is recommended to use specific data types instead of ambiguous `var`.
+
+#### Stateful vs Stateless Widget
+
+> We can create a skeleton Stateful widget by typing `stful` and pressing `Tab` similar to `stles` for Stateless widget
+
+A stateless widget is meant for things that do not change and are supposed to be static with the same state throughout the use.
+
+A stateful widget is used when something is expected to change, either by user interaction, network acativity, or automated. The dice in our project need to change and hence we migrate the content of our stateless widget to a state inside a stateful widget.
+
+Inside a stateless widget, when we define a variable, it warns us saying the components of a stateless widget must be immutable.
+
+#### Changing State in a Stateful widget
+
+In our case we have an `onPressed` callback that executes some code which should trigger a change. So inside that function we need to have a `setState` function which takes a function parameter that should have the changes that need to be reflected onto the app.
+
+When something changes inside the `setState` function, the components where it is used is marked as dirty and is redrawn the next time the screen is refreshed.
+
+#### The math library and Random Number Generation
+
+> Documentation: [dart:math library](https://api.dart.dev/dart-math/)
+
+We can use `import 'dart:math'` to import the dart math library into our project. It has many useful functions, such as the random number generator. We can simply use `Random()` to generate a random number. We can pair it with a method such as `nextInt(a)` to get a random number from [0-a), or `nextDouble()` for [0.0, 1.0), or `nextBool()` for true or false.
+
+The math library also has co-ordinate geometry functions, trigonometry functions, constants, logarithms, etc.
+
+---
+
+### **Magic 8Ball**
+
+This is a challenge project, meaning I am on my own for this, I know what the app needs to be, but not how to make it. I cloned the [stub repository](https://github.com/londonappbrewery/magic-8-ball-flutter) and copied relevant files into my new project.
+
+The projct requires an app that has an 8Ball which contains answers to questions we might have in our mind. The answers are either "Yes", "No", "Ask Again Later", "The Answer is Yes" or "I Don't Know". This is similar to the dice app in that we simply need to swap the images on user click so it should be simple enough.
+
+There's step by step instructions but I will first finish the project then compare to specs, because I don't have to be bound by them, yet.
+
+After the module was completed, I reviewed the intented solution, and it had suggested a stateful `Ball` widget inside a stateless `BallPage` widget, so I incorporated that and it was done in less than half an hour.
+
+---
+
+### **Xylophone Instrument App**
+
+> Starting files: [Xylophone Stub](https://github.com/londonappbrewery/xylophone-flutter)
+
+With this app, our goal is to create a xylophone using the given assets to play sounds when either key of the xylophone is pressed.
+
+#### Flutter Packages
+
+> Documentation: [Using packages](https://docs.flutter.dev/packages-and-plugins/using-packages)
+
+Flutter Packages are open source libraries that implement a feature which we can simply add to our project so that we don't have to reinvent the wheel.
+
+The official place where packages are downloaded as dependencies is [pub.dev](https://pub.dev/) where we can search for packages, which have their own details, install guides, and usage docs. Since the libraries are open source, we can also read their source code.
+
+To use packages, we need to add them to the dependencies then import them. In this project, we use the [audioplayers](https://pub.dev/packages/audioplayers) package to play the sounds on whatever platform the app is run in.
+
+#### Dart Functions
+
+Just like other programming languages, Dart functions can take arguments. They can be in the form of positional arguments like `void fnName(int a, int b)`, which we can call with eg.`fnName(2,3)`.
+
+They can also be in the form of named arguments by enclosing with curly brackets as `void fnName({int a, int b})` to call which we need to specify the name regardless of the order like `fnName(b:3, a:2)`.
+
+Similarly, we can also define return types other than void and return something with that data type.
+
+**Arrow Functions** in Dart are much the same as in JavaScript, in that they allow writing a single line function into an arrow function, omitting return keywords if any. For example, the following functions:
+
+```
+void greet(String name){
+    print('Hello, $name');
+}
+
+void add(int n1, int n2){
+    return n1 + n2;
+}
+```
+
+are the same as simply writing:
+
+```
+void greet(String name) => print('Hello, $name');
+
+void add(int n1, int n2) => n1 + n2;
+```

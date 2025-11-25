@@ -308,7 +308,7 @@ Similarly, we can also define return types other than void and return something 
 
 **Arrow Functions** in Dart are much the same as in JavaScript, in that they allow writing a single line function into an arrow function, omitting return keywords if any. For example, the following functions:
 
-```
+```dart
 void greet(String name){
     print('Hello, $name');
 }
@@ -320,8 +320,180 @@ void add(int n1, int n2){
 
 are the same as simply writing:
 
-```
+```dart
 void greet(String name) => print('Hello, $name');
 
 void add(int n1, int n2) => n1 + n2;
+```
+
+## Day 5
+
+### **Quizzler App**
+
+> Starting code: [Quizzler stub](https://github.com/londonappbrewery/quizzler-flutter)
+
+The starting code has deprecated code so we'll need to make changes to the main.dart by replacing FlatButton with TextButton and all its relevant changes.
+
+#### Lists in Dart
+
+> Documentation: [List<E> class](https://api.flutter.dev/flutter/dart-core/List-class.html)
+
+Similar to arrays in other programming languages, we can create Lists in Dart by using the `List` keyword. It is similar to `var` for normal variables. When we need to specify a data type we instead use eg.`List<int>` for integer list.
+
+We can use the `.add()` method to add something to the List. We can also use the index notation similar to arrays to add/remove/change. We can use `remove(content)` to remove the content from the list. There's other ways to add/remove in the documentation.
+
+Multi children widgets in Flutter like Row, Column take List values.
+
+> In Dartpad we can use the hex of the gist as the route to open the GitHub gist code in the editor.
+
+#### Escape Characters
+
+Just like in other languages, Dart has escape characters with `\` so we can write single quotes as `\'` and not have it terminate a string.
+
+#### Conditionals in Dart (if...else)
+
+Conditionals in Dart are just like any other language, with:
+
+```dart
+if (condition1){
+    statement1;
+} else if(condition2 && condition3){
+    statement2;
+} else {
+    statement3;
+}
+```
+
+> ### Object Oriented Programming in Dart
+
+#### Classes and Objects in Dart
+
+We can create a new class, whose name by convention starts with a capital letter, using the `class` keyword. The content is enclosed by curly brackets and it contains properties that need to be initialized through a constructor which is defined as a normal function just with the same name as the class.
+
+This function can be a named or a positional argument function which receives the values for initialization as parameters. The methods can also be defined similarly.
+
+Accessing the properties or methods of a class is done using the dot (.) operator.
+The four pillars of OOP:
+
+1. #### Abstraction:
+    To reduce the complexity of code, we can create different components that have near-exclusive functionality and properties.
+2. #### Encapsulation
+
+    When we separate classes according to their roles, they should be bound to their own functionalities. This means we need a way to prevent other classes from altering a class' properties.
+
+    We can make a property/method private to a class so only objects of that class can use it by adding an underscore before the name of the property/method. When we do so, we need a public method (getter) to get the private property/call the private method, and similarly setter method to set property value.
+
+3. #### Inheritance
+
+    While abstracting code, there might be overlap or redundancy between different classes. We can make a class that inherits from its parent class, so that we can add new properties/functionalities while not having to repeat ones the parent class already has.
+
+    In Dart, we can inherit as:
+
+    ```dart
+    class ChildClass extends ParentClass{}
+    ```
+
+4. #### Polymorphism
+    While inheriting, we might have some differences that are inherited as well. In order to change them to fit the current class, we can morph them. In Dart we do so by using `@override` before the modified method. If we want to retain parent class functionality while adding to it, we can simply call the parent's method inside an overridden method using `super.methodName()`. eg.
+    ```dart
+    class Human{
+        void greet() => print('Hi!');
+    }
+    class Teen extends Human{
+        @override
+        void greet(){
+            super.greet();
+            print('Let\'s be friends.');
+        }
+    }
+    ```
+
+#### Constructors in Dart
+
+Each class in Dart has its own constructor, even if we don't create it, there is one by default. They are used to initialize the properties of a class. We can either use setting method or syntactic sugar. eg.
+
+```dart
+class Example{
+    int a;
+    Example(int b) => a=b
+}
+```
+
+is the same as
+
+```dart
+class Example{
+    int a;
+    Example(this.a){};
+}
+```
+
+---
+
+### Destini: A CYOA Game
+
+> Starting Code: [Destini stub](https://github.com/londonappbrewery/destini-challenge-starting.git)
+
+This project is given as a challenge where we need to create this game where we can choose our dialogue options/actions and continue the story.
+
+For this project I won't be going headfirst and just following the steps outlined, without relying too much on them. There's TODOs all around so that should guide me.
+
+The TODOs were sufficient to complete this challenge.
+
+---
+
+### BMI Calculator
+
+> Starting code: [BMI Calculator stub](https://github.com/londonappbrewery/bmi-calculator-flutter)
+
+In this project, we're focusing on design since that is one of the selling points of Dart. We can find design inspirations on [Dribble](https://dribbble.com/) and for this project, the inspiration was [Ruben Vaalt's BMI Calculator](https://dribbble.com/shots/4585382-Simple-BMI-Calculator).
+
+#### Flutter Themes
+
+> Documentation: [Using themes](https://docs.flutter.dev/cookbook/design/themes)
+
+Themes are a way to define a custom design pattern/palette/fonts etc to be used throughout the app. They help to make the app more look more consistent and polished. We can look at [the official learning resources](https://docs.flutter.dev/reference/learning-resources) to learn about different intermediate and advanced concepts like this.
+
+In order to create an app theme, we need to give a `ThemeData` widget to the theme property of a `MaterialApp`. There are presets for light and dark themes.
+
+#### ThemeData Widget
+
+> Documentation: [ThemeData class](https://api.flutter.dev/flutter/material/ThemeData-class.html)
+
+It has various properties we can set in order to get a fully customized look of the app. Some notable properties include `scaffoldBackgroundColor`, `primaryColor`(for major parts of the app like toolbars, tabbars, etc), `filledButtonTheme`, `floatingActionButtonTheme`, `focusColor`, `textButtonTheme`, etc.
+
+#### Using custom colors
+
+> Documentation: [Color class](https://api.flutter.dev/flutter/dart-ui/Color-class.html)
+
+The material color palette is limited and we might want to use custom colors, for that we can use `Color(value)` where value is a hexadecimal number that looks like `0xAARRGGBB`. So we must specify the alpha, red, green and blue intensity.
+
+> We can use the [ColorZilla extension](http://www.colorzilla.com/) to find the hex of a color from a webpage.
+
+#### Theme Widget
+
+> Documentation: [Theme class](https://api.flutter.dev/flutter/material/Theme-class.html)
+
+The Theme widget can be used to wrap another widget, it additionally has a `data` property which takes a `ThemeData` value to modify that widget only.
+
+#### Refactoring a Widget
+
+Flutter gives us a simple option to refactor a repetitive widget by right clicking on the widget and selecting extract widget. It then creates a new stateless widget which we can then use instead of the entire code when we need to use the same widget.
+
+#### Key class
+
+> Documentation: [Key class](https://api.flutter.dev/flutter/foundation/Key-class.html)
+
+Keys are used to identify widgets and are mostly useful when the widgets have movement,animations, etc. The documentation has a video explaining when to use keys.
+
+#### final vs const
+
+An instance variable/field is the same as a class' property. Immutabile means unchangeable, stateless widgets are immutable. To change something in such widgets, old widget is destroyed before new one replaces it.
+
+`final` and `const` are both immutable once assigned a value. The difference is given in [official docs](https://dart.dev/language/variables). a final variable can only be set once (at runtime), but a const is a compile-time constant.
+e.g.
+
+```dart
+final time1 = DateTime.now(); // Valid
+const time2 = DateTime.now(); // Invalid
 ```

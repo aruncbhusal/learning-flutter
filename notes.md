@@ -497,3 +497,121 @@ e.g.
 final time1 = DateTime.now(); // Valid
 const time2 = DateTime.now(); // Invalid
 ```
+
+> [!Note]
+> This project extends to Day 6 but it is still included in Day 5.
+
+#### GestureDetector
+
+> Documentation: [GestureDetector class](https://api.flutter.dev/flutter/widgets/GestureDetector-class.html)
+
+A button defined in MaterialUI has its own properties regarding colors, layouts, etc. In order to add ability to detect gestures like press, long press, drag, etc., we can wrap the widget inside a GestureDetector class which lets us add `onTap`, `onDoubleTap`, `onLongPress`, `onHorizontalDragStart` and other useful properties.
+
+#### Enums in Dart
+
+> Documentation: [Enum class](https://api.flutter.dev/flutter/dart-core/Enum-class.html)
+
+In order to assign abstract concepts to numbers, we can use enums to define them intuitively using enums then use the intuitive names to refer to the concepts.
+
+We can't create enums inside classes so they must be globally defined. The definition follows:
+
+```dart
+enum EnumName {typeA, typeB, typeC, ...}
+```
+
+#### Ternary Operators in Dart
+
+It is an easier way to enforce an if..else logic. The following statements are equivalent:
+
+```dart
+if (condition){
+    statementIfTrue;
+} else {
+    statementIfFalse;
+}
+// is equivalent to
+condition? statementIfTrue: statementIfFalse;
+```
+
+When working with booleans, we don't need to use `x == true` since this expression is true only when x is true itself. Similarly, we can use `!x` instead of `x == false`. A common use of ternary operator is when we want to add conditions to the right hand side of an assignment, which isn't possible with if..else.
+
+#### Functions as First Order Objects
+
+> Documentation: [Function class](https://api.flutter.dev/flutter/dart-core/Function-class.html)
+
+We can use the `Function` data type to declare a function just like a variable, which stores the actual function implementation. Similarly, we can also pass these functions by simply mentioning their name. eg.
+
+```dart
+final Function calculator = (int a, int b, Function operation){
+    return operation(a, b);
+}
+int add(int a, int b) => a+b;
+// Then call calculator to add as
+result = calculator(2, 3, add);
+```
+
+#### Flutter Slider
+
+> Documentation: [Slider class](https://api.flutter.dev/flutter/material/Slider-class.html)
+
+A slider is used to select from a range of values by simply sliding a point. We can customize various properties, like `activeColor`, `inactiveColor` (by default to the left and right of slider), `min`, `max` for the values, `value` that is to be represented by the slider, `onChanged` that takes a callback with a `double` type argument that gives new value received by sliding.
+
+In order to have a greater control over the look of the slider, we can wrap the slider with a [SliderTheme widget](https://api.flutter.dev/flutter/material/SliderTheme-class.html) which takes a property called `data` with data type [SliderThemeData](https://api.flutter.dev/flutter/material/SliderThemeData-class.html). If we try to set it this way, we need to give value for every property in SliderThemeData, but we can instead use `SliderTheme.of(context).copyWith(...)` to change only some properties while inheriting others from the nearest context, which is generally context passed to the build function.
+
+#### Composition vs Inheritance
+
+In most languages, we use inheritance primarily to build from scratch. But Flutter prefers composition over inheritance, meaning we don't modify existing large components to fit our use case but instead combine smaller components to create our larger component.
+
+#### Creating Custom Buttons
+
+We can take a look at source code of any existing button, eg. a [Floating Action Button (FAB)](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html), to see that it is built from a `RawMaterialButton`. We can go further until we find that components are built using the `Material` class at the basic level.
+
+> RawMaterialButton Documentation: [RawMaterialButton class](https://api.flutter.dev/flutter/material/RawMaterialButton-class.html)
+
+_This class is to be deprecated in later versions so there might be some changes in the future._
+
+#### Routes and Navigation in Flutter
+
+In order to build a multiscreen app, we need to have a routing/navigation ability to go from one screen to another.
+[Flutter Cookbook on Navigating Multiple Screens](https://docs.flutter.dev/cookbook/navigation/navigation-basics) has a guide on how to enable routing. We need to first have two routes, and use `Navigator.push()` to go to another route from home route, then `Navigator.pop()` to return back since routes are stored in a stack. When doing the push, we need to give the `context` as the first argument and a `MaterialPageRoute`([Documentation](https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html)) object as the second argument. While popping, we only need to give the context.
+
+The `MaterialPageRoute` takes a `build` argument which takes a callback that triggers the next route's constructor. Apart from this simple single push, we can also have a named push for which we need to specify a routes property in the `MaterialApp`. This takes a map that links each route name which is a string that begins with `/` to identify each part of the routes. Then we can use `initialRoute` property instead of `home` to set the home route. _We can only use one of the two properties._
+
+In order to navigate through named routes, we can use `Navigator.pushNamed(context, routeName)` where the routeName is the key of the route we want to access. The value in the map is the same as what we'd have in the `build` property of a `MaterialPageRoute`.
+
+### Dart Maps
+
+> Documentation: [Map<K,V> class](https://api.flutter.dev/flutter/dart-core/Map-class.html)
+
+A map is simply a collection of key-value pairs, similar to a dictionary in Python, and map implementations in other languages. We can specify our static types when defining key/value pairs using eg. `Map<String, int>` or we can let Dart dynamically do that for us. We can define and use a map as follows:
+
+```dart
+Map<String, int> mapName= {
+    'key1': num1,
+    'key2' : num2,
+}
+// To retrieve a value from the map we can use
+mapName['key1']; // This gives us the value associated with key1 i.e. num1
+```
+
+We can also add new entries to the map with the same notation as used to retrieve/modify existing entries like `mapName['key3'] = num3`.
+
+## Day 6
+
+### Clima: Weather App
+
+> Starting code: [Clima](https://github.com/londonappbrewery/Clima-Flutter)
+
+This is an app that is intended to show us how to pull GPS data from Android/iOS and also how to make API calls over the network to retrieve data from the internet.
+
+The starting app had older deprecated components like `FlatButton`, `RaisedButton` which I replaced with `TextButton` and `ElevatedButton`, and changed `withOpacity(double)` to `withAlpha(int)`.
+
+#### Location Services
+
+To get location information from an Android, we must request permission by first editing the `AndroidManifest.xml` file, then we can call the request method from `geolocator` library. For iOS, the permission needs `NSLocationWhenInUsageDescription` key inside `Info.plist`.
+
+#### Asynchronous programming in Dart
+
+When something takes a long time to complete but our system becomes idle at that time, we might not want to wait for it to finish before starting the next statement. We can avoid this synchronous behavior by returning a [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html), which is similar to `Promise` in JavaScript in that it ensures a result after execution, so we can simply perform other tasks and come back to it when result is available.
+
+But sometimes we might need to use the result of the async operation. In such cases, the function with `async` modifier is called with an `await` modifier so that the execution of the next expression will not occur until this one is completed.

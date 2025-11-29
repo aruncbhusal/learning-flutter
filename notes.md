@@ -615,3 +615,39 @@ To get location information from an Android, we must request permission by first
 When something takes a long time to complete but our system becomes idle at that time, we might not want to wait for it to finish before starting the next statement. We can avoid this synchronous behavior by returning a [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html), which is similar to `Promise` in JavaScript in that it ensures a result after execution, so we can simply perform other tasks and come back to it when result is available.
 
 But sometimes we might need to use the result of the async operation. In such cases, the function with `async` modifier is called with an `await` modifier so that the execution of the next expression will not occur until this one is completed.
+
+#### Widget Lifecycle
+
+A stateless widget is rebuilt each time something is to be changed. A stateful widget has an `initState` method, then the `build` method and finally `deactivate` method for when it is destroyed. `initState` is called when the object is inserted into the tree, and is a method of the `State` class we inherit from. These are the most important parts of the lifecycle.
+
+#### Dart Exception Handling
+
+Compile time errors are flagged before the app gets to run, but runtime exceptions must be handled by the developer. Similar to other languages, we use `try` and `catch` block for it. Code that can throw an exception is kept in `try` and the code to execute in case of exception is kept in `catch`. The `catch` block can take an argument which is the exception thrown. We should try to keep only the problematic code inside the try block.
+
+During exception handling, we might be trying to use a result of an expression, which becomes null. To later use a fallback, we can use `result ?? fallback` instead of simply `result` so that null checking is done by default (**Null Aware Operator**)
+
+We can throw an exception ourselves when something unexpected occurs by using the `throw` keyword.
+
+_I then took a day break and continuing on Day 9 after spending Day 6 and 7 until this point_
+
+#### APIs in Dart
+
+Flutter API lets us create applications that interface with the Operating System. But there's other types of APIs that deal with external systems. In order to get/put resources from an external service, we need an API, and we may also have some key associated with it in order to vertify or control these requests. We send a request with parameters, and get response.
+
+> Fetch data from the internet: [Flutter Cookbook](https://docs.flutter.dev/cookbook/networking/fetch-data)
+
+We can use the `http` library to make API requests. After importing it, we can simply use its methods like get, post, etc to make requests. Since it doesn't have a class, we might have a confusion about their origin. Hence we can use the `as` keyword during import like: `import 'package:http' as 'http'` so that we can use the functions as a method of `http`. The asynchronous response is a Response object's Future, which contains `body`, `statusCode` and other useful properties.
+
+#### API Response Parsing
+
+The response of an API request may be a XML format of `<key>` `<value>` pairs, or a JSON format of `{key: value, ..}` pairs. JSON is the more popular one, and in order to get data from the JSON response, we need to "parse" it, which can be done using `dart:convert` package which has `jsonDecode` function that we can use to convert the response to a Dart object to access normally.
+
+#### Passing Data From Widget to State
+
+A stateful widget comes with two classes, one is the widget itself and the other is a state object. When we use `Navigator.push` and pass something to the new widget, it is also passed to the state inside the `widget` property. We can use that property to access data sent to a state's corresponding widget.
+
+#### TextField
+
+> Documentation: [TextField class](https://api.flutter.dev/flutter/material/TextField-class.html)
+
+In order to take text input from the user, we need a text field, which has many properties we can change to modify the appearance. Its `decoration` property takes an `InputDecoration` object that can change `filled` state, `fillColor`, `icon` that appears with the field, `hintText`, `hintStyle` (which takes a `TextStyle`), `border` which takes `OutlineInputBorder` with `borderRadius` and `borderSide` properties, and more. Similarly the object can take a `style` property for the style of input text, `onChanged`, `onSubmitted` and other properties to retrieve the input text, etc.

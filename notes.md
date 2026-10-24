@@ -8,10 +8,10 @@ It is a UI toolkit to design platform independent apps with prebuilt customizabl
 
 #### Why Flutter?
 
--   Single codebase for every platform with a single language (Dart). It is en route to expand to WebDev via Hummingbird and even Desktop.
--   It draws responsive features from WebDev and hence suitable for all display sizes and aspect ratios.
--   Hot Reload lets us see our changes in real time rather than having to recompile, reinstall every time.
--   Open Source code lets us see and customize implementations unlike iOS's proprietary implementations.
+- Single codebase for every platform with a single language (Dart) (Platform-specific code, plugins, permissions, testing, UI adaptations may still be needed). It is en route to expand to WebDev via Hummingbird (early name for Flutter web effort) and even Desktop.
+- It draws responsive features from WebDev and hence suitable for all display sizes and aspect ratios.
+- Hot Reload lets us see our changes in real time rather than having to recompile, reinstall every time.
+- Open Source code lets us see and customize implementations unlike iOS's proprietary implementations.
 
 #### Basic Flutter App
 
@@ -20,7 +20,7 @@ The container may have widgets like rows and columns, images, text, icons, etc. 
 
 #### Prerequisites to Start Development
 
-We can use any OS, and a code editor, preferably Android Studio (which I will use for this course). If using other IDEs like VSCode or IntelliJ, might need to come back to Android Studio for certain features anyway.
+We can use any OS, and a code editor, preferably Android Studio (which I will use for this course). If using other IDEs like VSCode or IntelliJ, might need to come back to Android Studio for certain features anyway (though fine for most ordinary development).
 For Android app testing, we can emulate it or use physical android device. For iOS, a Mac is mandatory because we can't emulate iOS outside a Mac and Apple's Code Signing doesn't let external apps be sideloaded on an iOS unless we use Mac to add certificate.
 
 ## Day 1: **Set Up Continued** : **15/11/2025**
@@ -68,19 +68,19 @@ The course has given us a widget tree we can follow which goes like this:
 
 #### Material App
 
--   home: Scaffold
-    -   appBar: AppBar
-        -   backgroundColor: Color
-        -   title: Text
-    -   body: Center
-        -   child: Image
-            -   image: AssetImage
+- home: Scaffold
+    - appBar: AppBar
+        - backgroundColor: Color
+        - title: Text
+    - body: Center
+        - child: Image
+            - image: AssetImage
 
 #### Some resources for icons and graphics:
 
--   [Icons8](https://icons8.com/)
--   [Vecteezy](https://www.vecteezy.com/)
--   [Canva](https://www.canva.com/)
+- [Icons8](https://icons8.com/)
+- [Vecteezy](https://www.vecteezy.com/)
+- [Canva](https://www.canva.com/)
 
 ---
 
@@ -90,10 +90,10 @@ This project needs us to first clone a git repository as the skeleton project fr
 
 #### Hot Reload and Hot Restart
 
--   Hot Reload allows us to "reload" our app just like a website would, but without losing its state eg. a counter app retaining the count.
--   Hot Restart reloads the app and resets the state as well
+- Hot Reload allows us to "reload" our app just like a website would, but without losing its state eg. a counter app retaining the count.
+- Hot Restart reloads the app and resets the state as well
 
-We haven't been able to use Hot Reload yet because to use it, we need to have our app as a Stateful or Stateless Widget. We can create a Stateless Widget by simply typing `stless` and pressing Tab.
+We haven't been able to use Hot Reload yet because to use it, we need to have our app as a Stateful or Stateless Widget (normal widget based app structure). We can create a Stateless Widget by simply typing `stless` and pressing Tab.
 
 Then we can give the widget a name and in the main function, we run that widget which contains the app (in the case of this project, the MaterialApp). Every stateless widget has a build method. If we change something inside the method, only that parent method will be reloaded, making Hot Reload very fast. We can simply save the main.dart file to trigger Hot Reload.
 
@@ -103,12 +103,12 @@ Hot Restart has been possible in `I am Rich` and `I am Poor` projects, however, 
 
 > Documentation: [Container class](https://api.flutter.dev/flutter/widgets/Container-class.html)
 
-A Flutter Layout works similarly to Web Development and Container Widget is analogous to a div. A Container is a single child widget that allows positioning, sizing, etc. Here's some notable properties:
+A Flutter Layout works similarly to Web Development and Container Widget is analogous to a div (but not identical). A Container is a single child widget that allows positioning, sizing, etc. Here's some notable properties:
 
--   If container has no child, it takes maximum area available, else it takes as much area as taken by the child. We can use height and width properties to change the size of the container
--   We can use margin to place the container inside its parent, and padding to place the child inside the container. We can surround the container inside a SafeArea widget to avoid notches and other such areas on the phone.
+- If container has no child, it takes maximum area available (defined by constraints, properties), else it takes as much area as taken by the child. We can use height and width properties to change the size of the container
+- We can use margin to place the container inside its parent, and padding to place the child inside the container. We can surround the container inside a SafeArea widget to avoid notches and other such areas on the phone.
     > To wrap something with a widget, we can press on the widget and use Alt+Enter to open a context menu
--   For margin and padding, we use EdgeInsets object with all/fromLTRB/onlyLeft,onlyTop, etc.
+- For margin and padding, we use EdgeInsets object with all/fromLTRB/onlyLeft,onlyTop, etc.
 
 #### Multichildren Widgets: Column and Row
 
@@ -116,11 +116,11 @@ A Flutter Layout works similarly to Web Development and Container Widget is anal
 
 When we have multiple widgets in the layout, some simple widgets we can use are **Row** and **Column**. Some of their properties are:
 
--   They have children as a list of widgets written as `<Widget>[...]`. The children can be Containers, Text, or other Row/Column
--   Columns have vertical axis as main axis and horizontal as cross axis. Rows have it opposite. By default they take the maximum space available in main axis while only as the content requires in the cross axis.
--   We can set `mainAxisSize` to max(default) or min(content size), `mainAxisAlignment` to start(default), end, spaceBetween, etc., `verticalDirection` to up(default) or down(from below), `crossAxisAlignment` to baseline(default), end(by highest content width), stretch(cover full width), etc
--   To align items in a column to the right, we can use end cross axis alignment with an invisible container with width set as `double.infinity` to set it as wide as the display.
--   In order to space two items in a row/column, we can use a SizedBox between them with a given width/height
+- They have children as a list of widgets written as `<Widget>[...]`. The children can be Containers, Text, or other Row/Column
+- Columns have vertical axis as main axis and horizontal as cross axis. Rows have it opposite. By default they take the maximum space available in main axis while only as the content requires in the cross axis.
+- We can set `mainAxisSize` to max(default) or min(content size), `mainAxisAlignment` to start(default), end, spaceBetween, etc., `verticalDirection` to up(default is down) or down(from below), `crossAxisAlignment` to baseline(default is center), end(by highest content width), stretch(cover full width), etc
+- To align items in a column to the right, we can use end cross axis alignment with an invisible container with width set as `double.infinity` to set it as wide as the display.
+- In order to space two items in a row/column, we can use a SizedBox between them with a given width/height
 
 #### CircleAvatar Widget
 
@@ -144,7 +144,7 @@ We can also add our own fonts instead of default system fonts by [following this
 
 > Documentation: [Icons class](https://api.flutter.dev/flutter/material/Icons-class.html)
 
-Using icons is better when possible instead of plain images because they are drawn instead of just rendered as is. This means we can make changes to the appearance of these icons, and they are vector assets, not scalar like images.
+Using icons is better when possible instead of plain images because they are drawn instead of just rendered as is. This means we can make changes to the appearance of these icons, and they are vector assets, not scalar like images. Flutter Material icons are font glyphs instead of bitmaps but icons may use SVG, raster images, or other; choosing one depends on design and rendering requirements.
 
 We can see the material icons on [official Material UI page](https://mui.com/material-ui/material-icons/) and we can also use [this website to browse palettes](https://www.materialpalette.com/)
 
@@ -206,10 +206,10 @@ Buttons are used to prompt user tap/click and perform some action based on the t
 
 There are different types of buttons in Flutter, and the ones shown in the course have been deprecated and replaced since:
 
--   **[Text Button](https://api.flutter.dev/flutter/material/TextButton-class.html):** _(Replaces FlatButton used in this project.)_ It is the most basic of buttons, with some padding and not much other change in appearance apart from functionality.
--   **[Elevated Button](https://api.flutter.dev/flutter/material/ElevatedButton-class.html):** _(Replaces RaisedButton.)_ It has shadows and appears elevated with some change in other appearance.
--   **[Outlined Button](https://api.flutter.dev/flutter/material/OutlinedButton-class.html):** _(Replaces outlineButton.)_ It has outline border but no fill color.
--   **[Filled Button](https://api.flutter.dev/flutter/material/FilledButton-class.html):** It is filled with color but doesn't elevate when pressed.
+- **[Text Button](https://api.flutter.dev/flutter/material/TextButton-class.html):** _(Replaces FlatButton used in this project.)_ It is the most basic of buttons, with some padding and not much other change in appearance apart from functionality.
+- **[Elevated Button](https://api.flutter.dev/flutter/material/ElevatedButton-class.html):** _(Replaces RaisedButton.)_ It has shadows and appears elevated with some change in other appearance.
+- **[Outlined Button](https://api.flutter.dev/flutter/material/OutlinedButton-class.html):** _(Replaces outlineButton.)_ It has outline border but no fill color.
+- **[Filled Button](https://api.flutter.dev/flutter/material/FilledButton-class.html):** It is filled with color but doesn't elevate when pressed.
 
 > We can follow [this official Material 3 design overview](https://m3.material.io/components/buttons/overview) for using buttons in designs.
 
@@ -235,12 +235,12 @@ We can perform string interpolation in Dart by simply using `$variableName` insi
 
 Dart is a statically typed language. When we define a variable with a certain data type, it is locked to that data type. Some primitive data types are:
 
--   A `String` is written inside single code by convention
--   An `int` is the normal integer type
--   A `double` is a floating point type
--   A `bool` is the boolean type
+- A `String` is written inside single quote by convention but double quotes are also valid
+- An `int` is the normal integer type
+- A `double` is a floating point type
+- A `bool` is the boolean type
 
-Dart also has a `dynamic` data type that a variable is assigned when we don't initialize it at definition, enabling it to hold data of any type.
+Dart also has a `dynamic` data type that a variable is assigned (inferred to be) when we don't explicitly give it a type or initialize it at definition (a value to infer type from), enabling it to hold data of any type. It also helps bypass compile-time checks for dynamic Dart operations.
 
 We can define a variable in Dart by using `var` as well as specific data types like `int a`, `String b` or even `dynamic c`. It is recommended to use specific data types instead of ambiguous `var`.
 
@@ -248,9 +248,9 @@ We can define a variable in Dart by using `var` as well as specific data types l
 
 > We can create a skeleton Stateful widget by typing `stful` and pressing `Tab` similar to `stles` for Stateless widget
 
-A stateless widget is meant for things that do not change and are supposed to be static with the same state throughout the use.
+A stateless widget is meant for things that do not change and are supposed to be static with the same state throughout the use. (Though it can rebuild when configuration or relevant inherited dependencies change). It doesn't have a mutable `State` object of its own.
 
-A stateful widget is used when something is expected to change, either by user interaction, network acativity, or automated. The dice in our project need to change and hence we migrate the content of our stateless widget to a state inside a stateful widget.
+A stateful widget is used when something is expected to change, either by user interaction, network acativity, or automated (but it is also immutable by itself). The mutable state is held by the associated `State` object. The dice in our project need to change and hence we migrate the content of our stateless widget to a state inside a stateful widget.
 
 Inside a stateless widget, when we define a variable, it warns us saying the components of a stateless widget must be immutable.
 
@@ -258,7 +258,7 @@ Inside a stateless widget, when we define a variable, it warns us saying the com
 
 In our case we have an `onPressed` callback that executes some code which should trigger a change. So inside that function we need to have a `setState` function which takes a function parameter that should have the changes that need to be reflected onto the app.
 
-When something changes inside the `setState` function, the components where it is used is marked as dirty and is redrawn the next time the screen is refreshed.
+When something changes inside the `setState` function, the components where it is used is marked as dirty and is redrawn the next time the screen is refreshed. It doesn't directly redraw the pixels itself but notifies Flutter without guarantees of immediate rebuild.
 
 #### The math library and Random Number Generation
 
@@ -302,7 +302,7 @@ To use packages, we need to add them to the dependencies then import them. In th
 
 Just like other programming languages, Dart functions can take arguments. They can be in the form of positional arguments like `void fnName(int a, int b)`, which we can call with eg.`fnName(2,3)`.
 
-They can also be in the form of named arguments by enclosing with curly brackets as `void fnName({int a, int b})` to call which we need to specify the name regardless of the order like `fnName(b:3, a:2)`.
+They can also be in the form of named arguments by enclosing with curly brackets as `void fnName({int a, int b})` to call which we need to specify the name regardless of the order like `fnName(b:3, a:2)`. We may not pass all named parameters, so we must either mark them required, make them nullable or give default values: `void fn({required int a, int? b, int c = 0})`.
 
 Similarly, we can also define return types other than void and return something with that data type.
 
@@ -313,7 +313,7 @@ void greet(String name){
     print('Hello, $name');
 }
 
-void add(int n1, int n2){
+int add(int n1, int n2){
     return n1 + n2;
 }
 ```
@@ -323,7 +323,7 @@ are the same as simply writing:
 ```dart
 void greet(String name) => print('Hello, $name');
 
-void add(int n1, int n2) => n1 + n2;
+int add(int n1, int n2) => n1 + n2;
 ```
 
 ## Day 5
@@ -340,7 +340,7 @@ The starting code has deprecated code so we'll need to make changes to the main.
 
 Similar to arrays in other programming languages, we can create Lists in Dart by using the `List` keyword. It is similar to `var` for normal variables. When we need to specify a data type we instead use eg.`List<int>` for integer list.
 
-We can use the `.add()` method to add something to the List. We can also use the index notation similar to arrays to add/remove/change. We can use `remove(content)` to remove the content from the list. There's other ways to add/remove in the documentation.
+We can use the `.add()` method to add something to the List. We can also use the index notation similar to arrays to add/remove/change. We can use `remove(content)` to remove the content from the list and `removeAt(index)` to remove element at given index. There's other ways to add/remove in the documentation.
 
 Multi children widgets in Flutter like Row, Column take List values.
 
@@ -381,7 +381,7 @@ The four pillars of OOP:
 
     When we separate classes according to their roles, they should be bound to their own functionalities. This means we need a way to prevent other classes from altering a class' properties.
 
-    We can make a property/method private to a class so only objects of that class can use it by adding an underscore before the name of the property/method. When we do so, we need a public method (getter) to get the private property/call the private method, and similarly setter method to set property value.
+    We can make a property/method private to a class (correction: private to a library) so only objects of that class can use it by adding an underscore before the name of the property/method. When we do so, we need a public method (getter) to get the private property/call the private method, and similarly setter method to set property value (not mandatory, but useful for controlled access/validation).
 
 3. #### Inheritance
 
@@ -393,8 +393,10 @@ The four pillars of OOP:
     class ChildClass extends ParentClass{}
     ```
 
+    Also, we can implement an interface using `implements`, which is separate from extending a class.
+
 4. #### Polymorphism
-    While inheriting, we might have some differences that are inherited as well. In order to change them to fit the current class, we can morph them. In Dart we do so by using `@override` before the modified method. If we want to retain parent class functionality while adding to it, we can simply call the parent's method inside an overridden method using `super.methodName()`. eg.
+    While inheriting, we might have some differences that are inherited as well. In order to change them to fit the current class, we can morph them. In Dart a method of doing so by using `@override` before the modified method. If we want to retain parent class functionality while adding to it, we can simply call the parent's method inside an overridden method using `super.methodName()`. eg.
     ```dart
     class Human{
         void greet() => print('Hi!');
@@ -415,7 +417,7 @@ Each class in Dart has its own constructor, even if we don't create it, there is
 ```dart
 class Example{
     int a;
-    Example(int b) => a=b
+    Example(int b) : a=b;
 }
 ```
 
@@ -424,9 +426,11 @@ is the same as
 ```dart
 class Example{
     int a;
-    Example(this.a){};
+    Example(this.a);
 }
 ```
+
+Note: We can't assign `a=b` inside the constructor body since a non-nullable variable (like `a`) must be initialized before constructor runs, so we use initialization expressions that run as a part of object creation, before the constructor.
 
 ---
 
@@ -454,7 +458,7 @@ In this project, we're focusing on design since that is one of the selling point
 
 Themes are a way to define a custom design pattern/palette/fonts etc to be used throughout the app. They help to make the app more look more consistent and polished. We can look at [the official learning resources](https://docs.flutter.dev/reference/learning-resources) to learn about different intermediate and advanced concepts like this.
 
-In order to create an app theme, we need to give a `ThemeData` widget to the theme property of a `MaterialApp`. There are presets for light and dark themes.
+In order to create an app theme, we need to give a `ThemeData` configuration object to the theme property of a `MaterialApp` or data property of a `Theme` widget. There are presets for light and dark themes.
 
 #### ThemeData Widget
 
@@ -484,13 +488,13 @@ Flutter gives us a simple option to refactor a repetitive widget by right clicki
 
 > Documentation: [Key class](https://api.flutter.dev/flutter/foundation/Key-class.html)
 
-Keys are used to identify widgets and are mostly useful when the widgets have movement,animations, etc. The documentation has a video explaining when to use keys.
+Keys are used to identify widgets and are also useful when the widgets have movement,animations, etc. They help Flutter determine whether a new widget corresponds to an existing element when widgets move in a tree and also help in state preservation. The documentation has a video explaining when to use keys.
 
 #### final vs const
 
 An instance variable/field is the same as a class' property. Immutabile means unchangeable, stateless widgets are immutable. To change something in such widgets, old widget is destroyed before new one replaces it.
 
-`final` and `const` are both immutable once assigned a value. The difference is given in [official docs](https://dart.dev/language/variables). a final variable can only be set once (at runtime), but a const is a compile-time constant.
+`final` and `const` are both immutable (correction: final simply prevents reassignment but is not strictly immutable) once assigned a value. The difference is given in [official docs](https://dart.dev/language/variables). a final variable can only be set once (at runtime), but a const is a compile-time constant.
 e.g.
 
 ```dart
@@ -529,7 +533,7 @@ if (condition){
 } else {
     statementIfFalse;
 }
-// is equivalent to
+// is equivalent to the expression:
 condition? statementIfTrue: statementIfFalse;
 ```
 
@@ -539,10 +543,10 @@ When working with booleans, we don't need to use `x == true` since this expressi
 
 > Documentation: [Function class](https://api.flutter.dev/flutter/dart-core/Function-class.html)
 
-We can use the `Function` data type to declare a function just like a variable, which stores the actual function implementation. Similarly, we can also pass these functions by simply mentioning their name. eg.
+We can use the `Function` data type to declare a function just like a variable, which stores the actual function implementation. Similarly, we can also pass these functions by simply mentioning their name. eg. We can set specific function type or `typedef` a function to a new type to use for better clarity.
 
 ```dart
-final Function calculator = (int a, int b, Function operation){
+final double Function calculator = (int a, int b, Function operation){
     return operation(a, b);
 }
 int add(int a, int b) => a+b;
@@ -564,7 +568,7 @@ In most languages, we use inheritance primarily to build from scratch. But Flutt
 
 #### Creating Custom Buttons
 
-We can take a look at source code of any existing button, eg. a [Floating Action Button (FAB)](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html), to see that it is built from a `RawMaterialButton`. We can go further until we find that components are built using the `Material` class at the basic level.
+We can take a look at source code of any existing button, eg. a [Floating Action Button (FAB)](https://api.flutter.dev/flutter/material/FloatingActionButton-class.html), to see that it is built from a `RawMaterialButton`. We can go further until we find that components are built using the `Material` class at the basic level. It is not recommended to build UI around this but prefer
 
 > RawMaterialButton Documentation: [RawMaterialButton class](https://api.flutter.dev/flutter/material/RawMaterialButton-class.html)
 
@@ -572,7 +576,7 @@ _This class is to be deprecated in later versions so there might be some changes
 
 #### Routes and Navigation in Flutter
 
-In order to build a multiscreen app, we need to have a routing/navigation ability to go from one screen to another.
+In order to build a multiscreen app, we need to have a routing/navigation ability to go from one screen to another. A basic way is to use `Navigator.push()` and `Navigator.pop()`.
 [Flutter Cookbook on Navigating Multiple Screens](https://docs.flutter.dev/cookbook/navigation/navigation-basics) has a guide on how to enable routing. We need to first have two routes, and use `Navigator.push()` to go to another route from home route, then `Navigator.pop()` to return back since routes are stored in a stack. When doing the push, we need to give the `context` as the first argument and a `MaterialPageRoute`([Documentation](https://api.flutter.dev/flutter/material/MaterialPageRoute-class.html)) object as the second argument. While popping, we only need to give the context.
 
 The `MaterialPageRoute` takes a `build` argument which takes a callback that triggers the next route's constructor. Apart from this simple single push, we can also have a named push for which we need to specify a routes property in the `MaterialApp`. This takes a map that links each route name which is a string that begins with `/` to identify each part of the routes. Then we can use `initialRoute` property instead of `home` to set the home route. _We can only use one of the two properties._
@@ -604,29 +608,29 @@ We can also add new entries to the map with the same notation as used to retriev
 
 This is an app that is intended to show us how to pull GPS data from Android/iOS and also how to make API calls over the network to retrieve data from the internet.
 
-The starting app had older deprecated components like `FlatButton`, `RaisedButton` which I replaced with `TextButton` and `ElevatedButton`, and changed `withOpacity(double)` to `withAlpha(int)`.
+The starting app had older deprecated components like `FlatButton`, `RaisedButton` which I replaced with `TextButton` and `ElevatedButton`, and changed `withOpacity(double)` to `withAlpha(int)` where `withOpacity` uses a fractional opacity and `withAlpha` uses the Alpha channel with values 0-255.
 
 #### Location Services
 
-To get location information from an Android, we must request permission by first editing the `AndroidManifest.xml` file, then we can call the request method from `geolocator` library. For iOS, the permission needs `NSLocationWhenInUsageDescription` key inside `Info.plist`.
+To get location information from an Android, we must request permission by first editing the `AndroidManifest.xml` file, then we can call the request method from `geolocator` library. For iOS, the permission needs `NSLocationWhenInUseUsageDescription` key inside `Info.plist`.
 
 #### Asynchronous programming in Dart
 
-When something takes a long time to complete but our system becomes idle at that time, we might not want to wait for it to finish before starting the next statement. We can avoid this synchronous behavior by returning a [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html), which is similar to `Promise` in JavaScript in that it ensures a result after execution, so we can simply perform other tasks and come back to it when result is available.
+When something takes a long time to complete but our system becomes idle at that time, we might not want to wait for it to finish before starting the next statement. We can avoid this synchronous behavior by returning a [Future](https://api.flutter.dev/flutter/dart-async/Future-class.html), which is similar to `Promise` in JavaScript in that it ensures a result (or error) after execution, so we can simply perform other tasks and come back to it when result is available. Since there is a chance of failure, callers should handle them appropriately.
 
-But sometimes we might need to use the result of the async operation. In such cases, the function with `async` modifier is called with an `await` modifier so that the execution of the next expression will not occur until this one is completed.
+But sometimes we might need to use the result of the async operation. In such cases, the function with `async` modifier is called with an `await` modifier so that the execution of the next expression (in current async function) will not occur until this one is completed. `await` doesn't block the entire UI thread. Such a function normally returns a `Future`.
 
 #### Widget Lifecycle
 
-A stateless widget is rebuilt each time something is to be changed. A stateful widget has an `initState` method, then the `build` method and finally `deactivate` method for when it is destroyed. `initState` is called when the object is inserted into the tree, and is a method of the `State` class we inherit from. These are the most important parts of the lifecycle.
+A stateless widget is rebuilt each time something is to be changed. A stateful widget has an `initState` method, then the `build` method and finally `deactivate` method for when it is destroyed (correction: removed from current position in the tree). `initState` is called when the object is inserted into the tree, and is a method of the `State` class we inherit from. These are the most important parts of the lifecycle: `initState`, `didChangeDependencies`, `build`, `didUpdateWidget`, `deactivate`, and `dispose` where final cleanup is performed.
 
 #### Dart Exception Handling
 
-Compile time errors are flagged before the app gets to run, but runtime exceptions must be handled by the developer. Similar to other languages, we use `try` and `catch` block for it. Code that can throw an exception is kept in `try` and the code to execute in case of exception is kept in `catch`. The `catch` block can take an argument which is the exception thrown. We should try to keep only the problematic code inside the try block.
+Compile time errors are flagged before the app gets to run, but runtime exceptions must be handled by the developer. Similar to other languages, we use `try` and `catch` block for it. Code that can throw an exception is kept in `try` and the code to execute in case of exception is kept in `catch`. The `catch` block can take an argument which is the exception thrown. We should try to keep only the problematic code inside the try block. We can also use `finally` block at the end for cleanup that must happen regardless of exception occurence.
 
 During exception handling, we might be trying to use a result of an expression, which becomes null. To later use a fallback, we can use `result ?? fallback` instead of simply `result` so that null checking is done by default (**Null Aware Operator**)
 
-We can throw an exception ourselves when something unexpected occurs by using the `throw` keyword.
+We can throw an exception ourselves when something unexpected occurs by using the `throw` keyword. Not all exceptions are the same; some different exceptions may be network error, unsuccessful HTTP status, or invalid response data. The latter two are generally manually thrown.
 
 _I then took a day break and continuing on Day 9 after spending Day 6 and 7 until this point_
 
@@ -636,11 +640,11 @@ Flutter API lets us create applications that interface with the Operating System
 
 > Fetch data from the internet: [Flutter Cookbook](https://docs.flutter.dev/cookbook/networking/fetch-data)
 
-We can use the `http` library to make API requests. After importing it, we can simply use its methods like get, post, etc to make requests. Since it doesn't have a class, we might have a confusion about their origin. Hence we can use the `as` keyword during import like: `import 'package:http' as 'http'` so that we can use the functions as a method of `http`. The asynchronous response is a Response object's Future, which contains `body`, `statusCode` and other useful properties.
+We can use the `http` library to make API requests. After importing it, we can simply use its methods like get, post, etc to make requests. Since it doesn't have a class, we might have a confusion about their origin. Hence we can use the `as` keyword during import like: `import 'package:http' as http` so that we can use the functions as a method of `http`. The asynchronous response is a Response object's Future, which contains `body`, `statusCode` and other useful properties.
 
 #### API Response Parsing
 
-The response of an API request may be a XML format of `<key>` `<value>` pairs, or a JSON format of `{key: value, ..}` pairs. JSON is the more popular one, and in order to get data from the JSON response, we need to "parse" it, which can be done using `dart:convert` package which has `jsonDecode` function that we can use to convert the response to a Dart object to access normally.
+The response of an API request may be a XML format of `<key>` `<value>` pairs, or a JSON format of `{key: value, ..}` pairs. JSON is the more popular one, and in order to get data from the JSON response, we need to "parse" it, which can be done using `dart:convert` package which has `jsonDecode` function that we can use to convert the response to a Dart object to access normally. The result is dynamically typed so we should validate it against expected type.
 
 #### Passing Data From Widget to State
 
@@ -651,3 +655,67 @@ A stateful widget comes with two classes, one is the widget itself and the other
 > Documentation: [TextField class](https://api.flutter.dev/flutter/material/TextField-class.html)
 
 In order to take text input from the user, we need a text field, which has many properties we can change to modify the appearance. Its `decoration` property takes an `InputDecoration` object that can change `filled` state, `fillColor`, `icon` that appears with the field, `hintText`, `hintStyle` (which takes a `TextStyle`), `border` which takes `OutlineInputBorder` with `borderRadius` and `borderSide` properties, and more. Similarly the object can take a `style` property for the style of input text, `onChanged`, `onSubmitted` and other properties to retrieve the input text, etc.
+
+## Day 7
+
+_(Calling it day 7 for continuity's sake)_
+
+## Crypto Ticker Project
+
+> Starting code: [https://github.com/londonappbrewery/bitcoin-ticker-flutter]
+
+This is a semi-challenge i.e. has both challenge and tutorial. The purpose is an app that tracks the exchange rates of different cryptocurrencies to country currencies. It will have platform specific currency selector (dropdown for Android and slider for iOS).
+
+#### Dropdown Menu
+
+> Documentation: [DropdownMenu class](https://api.flutter.dev/flutter/material/DropdownMenu-class.html)
+
+This class is the updated Material 3 version of [DropdownButton class](https://api.flutter.dev/flutter/material/DropdownButton-class.html) that is used in the course. I will be using the DropdownMenu class for this project. Some differences from the course to keep in mind here are that the properties used will be different: `dropdownMenuEntries` instead of `items` which takes a list of `DropdownMenuEntry`s instead of `DropdownMenuItem`s, `onSelected` instead of `onChanged`, and now keeping track of value is not necessary so to set initial value we can use `initialSelection` instead of `value` property. A state tracking is nonetheless needed for the rest of the application to react to a selection.
+
+#### Loops in Dart
+
+There's a C style `for` loop in Dart which looks exactly the same:
+
+```dart
+for (i = start; i < stop; i++){
+    doSomething(i);
+}
+```
+
+And there's a `for..in` loop that looks a bit different:
+
+```dart
+for (datatype variable in list){
+    doSomething(variable);
+}
+``
+```
+
+#### Cupertino Widgets
+
+Android has `Material` and iOS has `Cupertino` styles for widgets. Some widgets like the DropdownMenu don't exist on iOS. We can see [Cupertino widgets here](https://api.flutter.dev/flutter/cupertino/). In the place of dropdown menu, we have the Cupertino Picker. We need to import the cupertino library just like the material library to use its components.
+
+#### Cupertino Picker
+
+> Documentation: [CupertinoPicker class](https://api.flutter.dev/flutter/cupertino/CupertinoPicker-class.html)
+
+In order to select from a list of options we can use a scrollable picker widget. It can use properties such as `backgroundColor` for background color, `itemExtent` for a uniform height of the children, `children` for the children widgets(generic), `onSelectedItemChanged` for selections, `scrollController` which takes `FixedExtentScrollController` object with a possible `initialItem` property. The items are regarded by their index here rather than the values. We can also use other properties like `magnification`, `squeeze`, `useMagnifier` etc to customize the UI.
+
+```
+Continuing from here on Oct 24, 2026. Not quite "next day" as much as "next year" but I can't leave something halfway. I will not break numbering so today is day 7 for all intents and purposes
+```
+
+#### App Platform Specific UI
+
+Since we want to show the dropdown menu on Android and the Cupertino Picker on iOS, we need a way to tell them apart. The `Platform` class inside `dart:io` library exposes booleans like `isIOS`, `isAndroid`, and more that we can use for picking UI elements depending on the platform the app is running on.
+
+#### CoinAPI
+
+> Documentation: [CoinAPI Exchange Rate Docs](https://www.coinapi.io/products/exchange-rates-api/docs)
+
+The project requires fetching cryptocurrency exchange rates using the API for which we need to get an API key, similar to the Weather API in Clima. In the REST API section (as of today) I found two endpoints: one to get a single exchange rate, another for a list of rates for a currency.
+Since CoinAPI has gone completely paid, I have to switch to something else. I picked [ExchangeRate API](https://www.exchangerate-api.com/) but then realized it was fiat only, so then I switched to [CoinMarketcap](https://coinmarketcap.com/), which was too verbose, so I found [CoinGecko](https://docs.coingecko.com/) and its keyless API is exactly what I needed.
+
+#### Challenge: Complete the App
+
+The rest of the app is left as a challenge. In the first step, we must display the exchange rate of BTC to USD in the homescreen. Next step is to be able to change the currency from the picker and it should make an appropriate API call. I had already done both steps together it seems. The final step is to be able to get exchange rates for multiple cryptocurrencies together.

@@ -22,10 +22,7 @@ const kConditionTextStyle = TextStyle(
 const kCityInputDecoration = InputDecoration(
     filled: true,
     fillColor: Colors.white,
-    icon: Icon(
-        Icons.location_city,
-        color: Colors.white
-    ),
+    icon: Icon(Icons.location_city, color: Colors.white),
     hintText: 'Enter the city',
     hintStyle: TextStyle(
       color: Colors.grey,
@@ -33,7 +30,6 @@ const kCityInputDecoration = InputDecoration(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10.0)),
       borderSide: BorderSide.none,
-    )
-);
+    ));
 
 const OWA_API_KEY = '5bfd4f712bc75f771a0bb1902096917a';

@@ -660,7 +660,7 @@ In order to take text input from the user, we need a text field, which has many 
 
 _(Calling it day 7 for continuity's sake)_
 
-## Crypto Ticker Project
+### Crypto Ticker Project
 
 > Starting code: [https://github.com/londonappbrewery/bitcoin-ticker-flutter]
 
@@ -719,3 +719,127 @@ Since CoinAPI has gone completely paid, I have to switch to something else. I pi
 #### Challenge: Complete the App
 
 The rest of the app is left as a challenge. In the first step, we must display the exchange rate of BTC to USD in the homescreen. Next step is to be able to change the currency from the picker and it should make an appropriate API call. I had already done both steps together it seems. The final step is to be able to get exchange rates for multiple cryptocurrencies together.
+
+## Day 8
+
+### Flash Chat
+
+> Starting code : [https://github.com/londonappbrewery/flash-chat-flutter]
+
+#### Named Routes
+
+As covered in day 5, we can set a map of routes with each key starting with '/' and the `initialRoute` property replacing the `home` for the MaterialApp. The value is a function that takes context and returns an instantiated page widget. Then in order to navigate among those routes, we can use `Navigator.pushNamed(context, <routestring>)`. If we instead use the Web-style routes, we must have a `/` route alongside other `/name` routes.
+
+#### Static Modifier in Dart
+
+The keyword `static` is used to define class-wide variables and methods. This means that we don't need to instantiate the class in order to use them. This is useful when the properties/methods are not tied to a specific object but rather the class itself. When such a variable is a constant, we use `static const` (`const` alone cannot be used inside a class). A method may also be static when it is connected to the class itself rather than one instance.
+
+#### Animations with Flutter
+
+Initial Android/iOS development wasn't focused on animations as the devices were not equipped with sufficient compute for them, so complex animations took lots of code. But since Flutter was developed recently, it has simplified adding animations to apps developed using it.
+
+#### Hero Animation
+
+> Documentation: [https://docs.flutter.dev/ui/animations/hero-animations]
+
+Also called a Shared Element Animation, it applies when we transition from one screen to another and they both contain a shared element. The hero "flies" from one screen to another. For this, we must wrap the shared widget within a Hero widget and give them both an identical `tag` property value. Flutter engine can take care of the rest.
+
+#### Custom Animations
+
+> Documentations:
+> [https://api.flutter.dev/flutter/animation/AnimationController-class.html]
+> [https://api.flutter.dev/flutter/animation/Animation-class.html]
+
+Building animations requires a Ticker, an Animation Controller and an Animation Value. Each tick of the ticker triggers a step in the animation, and an animation controller class determines when the animation starts, stops, how long it lasts, etc. The animation value is responsible for the animation itself, usually going from 0 to 1. We can set an upper and lower bound for this animating value, and use the `addListener` object to pass a callback where we use a `setState` to reflect the change in value. This value is then used in the UI to perform animations. We can have separate `forward` and `reverse` animations that change the value in opposite ways, and can check completion state with ``
+
+#### Curved Animation
+
+> Documentations:
+> [https://api.flutter.dev/flutter/animation/CurvedAnimation-class.html]
+> [https://api.flutter.dev/flutter/animation/Curves-class.html]
+
+We can also change the animation curve using an object of the `CurvedAnimation` class instead of linear. It can also be used when the forward and backward animations should have different velocity curves.
+
+#### Tween Animation
+
+> Documentation: [https://api.flutter.dev/flutter/animation/Tween-class.html]
+
+This kind of animation includes values that go in be**tween** starting and ending values in an animation (interpolation). This could be animating a change of color, border width, alignment, etc. There are many types of tween animations that implement the Tween class. To use one, we can instantiate the class and call the `animate` method which returns an `Animation` object whose value we can use.
+
+#### Mixins in Dart
+
+> Documentation: [https://dart.dev/language/mixins]
+
+`Mixins are a way of reusing a class's code in multiple class hierarchies.` This means that they can be used by classes that share common features but are not inherited from the same chain. If class C inherits A and class D inherits B, since Dart and many other languages only support single inheritance, we need a way to share a method that might be common for C and D. They can both use the `with` method to implement a mixin that can contain multiple methods and fields. This also helps reduce redundant overrides in subclasses that need similar implementations. Mixins can have abstract methods that the subclass can define, and it can also implement interfaces. If the mixin is for a specific superclass, we can use the `on` keyword to specify the superclass.
+
+#### Prepackaged Animations
+
+The community also has libraries we can use to create amazing looking animations with little effort. With [sequence animation](https://pub.dev/packages/flutter_sequence_animation), we can chain animations in sequence. Similarly, [Rubber](https://pub.dev/packages/rubber) can be used for an elastic top/bottom sheet that we can pull (scroll). [Sprung](https://pub.dev/packages/sprung) gives us animations using real physics equations.
+
+#### Animated Text Kit
+
+> [PubDev Page](https://pub.dev/packages/animated_text_kit)
+
+This is a text animation library used in this project. It has many types of animations available such as Rotate, Fade, Typewriter, Scale, Colorize, etc to make text animations effortless.
+
+#### [Google Firebase](https://firebase.google.com)
+
+For our chat app, Firebase can be used for cloud database purposes to store the login details and messages of users using our app. In order to get started for the project, we can go to our console and create a new project by giving it a name and going through a few checklists.
+
+After the project is set up, we now need to set up the app inside the project. We can select Android first, and then provide the applicationId in `app/build.gradle.kts`. In the next step we download `google-services.json` to the same folder. Since we've moved from Groovy (`build.gradle` era) of the course, to Kotlin DSL (`build.gradle.kts`), we have slightly different files to update. Similarly, to add an iOS app to the same project, we can follow a similar step by getting the Bundle ID and adding a `.plist` file into the iOS folder. We need a Mac with Xcode to be able to do this.
+
+But since 2022, we have an even easier method to add our app to our project, by selecting Flutter in the add menu. For this, we need to install the [Firebase CLI](https://firebase.google.com/docs/cli) and run `firebase login`. We can either download it as a standalone binary or a NPM package, I will do the second. Other requirements to start are Flutter SDK and a Flutter project. After logging in, we run `dart pub global activate flutterfire_cli` and then from the project root, `flutterfire configure --project=<your-firebase-project-id>`
+
+#### Setting Up Firebase in The Flutter Project
+
+We need to add Firebase packages to our project to make it work. For this, I'll be using the latest packages because of dependency and support constraint. The most important package we need first is [Firebase Core](https://pub.dev/packages/firebase_core) as other Firebase packages depend on it. We'll be using two other packages: [Firebase Auth](https://pub.dev/packages/firebase_auth) for authentication, and [Cloud Firestore](https://pub.dev/packages/cloud_firestore) to store other application data. For iOS, we need to update Cocoapods and it will be used to get the Firebase dependencies (this might be outdated information I can't test since I don't own a Mac).
+
+#### Registering a User with Firebase Auth
+
+In order to make Firebase Auth work, we should first enable it in the project in Firebase. Then we select the mode of authentication, we can simply choose email-password. Then we make changes in the code to make use of it. We import the package and get a `FirebaseAuth.instance` whose `createUserWithEmailAndPassword` method takes email and password to create a new user. After appropriate error handling, we can move to the page/action that requires authentication. There we check authentication by getting the authenticated user with the `currentUser` method. We usually do this process in the initState of the page, or at the start of an action, to decide whether to proceed.
+
+#### Logging In and Out
+
+To log in with the same email and password, we simply use the method `signInWithEmailAndPassword`, and to log out we use `signOut`. After signing out, we generally get back to the not-logged-in page, or stop any activity that needs being signed in.
+
+#### Adding a Loading Spinner
+
+When an async task is going on, since we're waiting for it to complete, we need to let the user know the loading state, for which we can use a spinner. We can use the [modal_progress_hud_nsn](https://pub.dev/packages/modal_progress_hud_nsn) package (fork of`modal_progress_hud` used in the course that supports null safety). For this, we wrap the screen (within Scaffold) with ModalProgressHUD widget and in its `inAsyncCall` property, we provide a boolean value, which when true, triggers the loading spinner. We can then toggle this variable inside a `setState` to show the spinner.
+
+#### Storing Messages in Cloud Firestore
+
+Firebase has extensive documentation we can read for any of its services. For Cloud Firestore, which uses NoSQL, we simply select it under Databases and create a database. We can start it in test mode so that we can modify the data on the fly for our current stage. Deployed projects use production mode instead. After creating a database, we then define a collection (similar to SQL tables) inside which we define the schema (fields) : this is optional since NoSQL can inherently take any schema, and collections can be created by simply adding some data and assigning it a collection name, and we must add at least one document (analogous to SQL row) for which we can set documentID. To add storing feature in the project, we instantiate the Cloud Firestore class and use the `collection` method with the collection name, and use the resulting object's `add` method which takes a map with a `String` key for which we use the field name, and a `dynamic` value, which in this case is the message.
+
+#### Retrieving Data From Cloud Firestore
+
+Similar to storing data, we can also retrieve data from the Firestore by accessing the collection and using the `getDocuments` method (now replaced by `get`) which gives us an object (result of our query). We can use the object's `documents` method to get a list of documents in the Firestore and use their `data` which returns the document. But in a chat app, this method is not preferred since we have to manually poll the Firestore and get all documents there.
+
+A better approach would be to use the `snapshots` method which gives us a stream we subscribe to. And in an `await`ed for loop, we can access the documents in that stream so that any new message in the Firestore will be automatically sent through the stream rather than us having to ask for data periodically. This is how we can achieve "instant" messaging in this case.
+
+#### Streams in Dart
+
+For some data that we need to wait for, we generally use `Future<type>` but for a continuously updating list of such data, we use `Stream<type>` so that when we're "subscribed" to that stream, our usage of the data in the stream gets triggered instantly as the server adds data to the stream. Since messages are asynchronous and aperiodic, it doesn't make sense to add a frequent, periodic polling mechanism, prompting the use of streams.
+
+#### Turning Streams into Flutter Widgets : StreamBuilder
+
+> Documentation: [https://api.flutter.dev/flutter/widgets/StreamBuilder-class.html]
+
+In order to work with the data received from the stream, we can use the StreamBuilder class that automatically triggers `setState` when our stream is updated. It is technically a widget that outputs whatever we build using the stream data. We cast it to the type we expect in the stream, in this case it is the `QuerySnapshot`. It requires two properties to function: `stream` is where we get the stream, in this case with the `snapshots` method for the collection, and `builder` takes a function that needs the context and an instance of the [AsyncSnapshot](https://api.flutter.dev/flutter/widgets/AsyncSnapshot-class.html) Flutter class, derived from the stream's snapshot. We can check if the snapshot has data with `hasData` and return a spinner if not, otherwise we can use the `data` property of the second parameter, which gives us the snapshot object, from which we can access the `docs`. We can then simply iterate on this list and add the widget associated with each document, or perform any other action per document. Each document here has a `data` map with the field name as key.
+
+We generally prefer getting the stream earlier and not inside the build method, and pass that variable in `stream`, as each rebuild can restart the asynchronous process.
+
+#### Scrollable List in Flutter : ListView
+
+> Documentation: [https://api.flutter.dev/flutter/widgets/ListView-class.html]
+
+Rather than using a plain Column which can cause content overflow, we can use the `ListView` widget so that their children are scrollable.
+
+#### User Dependent UI
+
+We may want to consider different aspect ratio or different screen sizes that accomodate different sizes of UI elements. One way to handle this is to wrap some elements with `Flexible` so that they can shrink when not enough space is available for the full size, avoiding overflow issues.
+
+Similarly, in a chat app, we want to differentiate the messages sent by the logged in person, and other people, for which we can simply check if the sender is the logged in user, and style the messages accordingly.
+
+#### Firestore Security
+
+In the Cloud Firestore dashboard, we can set some rules for who can access the database and perform actions on it. We can choose allow all, deny all, or authorized only. We can follow [this guide](https://firebase.google.com/docs/firestore/security/get-started) as well.

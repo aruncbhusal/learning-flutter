@@ -32,4 +32,4 @@ const kCityInputDecoration = InputDecoration(
       borderSide: BorderSide.none,
     ));
 
-const OWA_API_KEY = '5bfd4f712bc75f771a0bb1902096917a';
+const OWA_API_KEY = '<API_KEY>';

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "711647255015",
+    "project_id": "flash-chat-30c1b",
+    "storage_bucket": "flash-chat-30c1b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711647255015:android:2dc20e7b41f73a224f8542",
+        "android_client_info": {
+          "package_name": "com.acbstudio.flash_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCBjA72eubzhb8oaZMAqkLuOksys0eNjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711647255015:android:a89225f5b110c7804f8542",
+        "android_client_info": {
+          "package_name": "com.acbstudios.flash_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCBjA72eubzhb8oaZMAqkLuOksys0eNjM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -843,3 +843,73 @@ Similarly, in a chat app, we want to differentiate the messages sent by the logg
 #### Firestore Security
 
 In the Cloud Firestore dashboard, we can set some rules for who can access the database and perform actions on it. We can choose allow all, deny all, or authorized only. We can follow [this guide](https://firebase.google.com/docs/firestore/security/get-started) as well.
+
+## Day 9
+
+### To-Do App : WhaTodo
+
+The name of the app was Todoey but it didn't feel right so I started WhaTodo. We're not using any starting code for this one and doing it from scratch.
+
+#### BottomSheet Widget
+
+> Documentation: [https://api.flutter.dev/flutter/material/BottomSheet-class.html]
+
+This class is used for an element that is shown at the botom of the screen. It may either be persistent (meant to be alongside other app content) or a modal type (makes other content unusable until it is closed) that opens and closes based on interaction. A modal BottomSheet can be shown using the [showModalBottomSheet function](https://api.flutter.dev/flutter/material/showModalBottomSheet.html). In its argument, it takes a [WidgetBuilder](https://api.flutter.dev/flutter/widgets/WidgetBuilder.html) similar to the build function in a stateless/stateful widget.
+
+In order to make the lower elements visible despite a keyboard, we can use the `isScrollControlled` property with `showModalBottomSheet` and make the builder return a `SingleChildScrollView` widget with bottom padding of `Mediaquery.of(context).viewInsets.bottom`. This widget holds the bottomsheet contents as its child.
+
+#### State Management in Flutter
+
+State is the information that can change over time and influences what the application displays or how it behaves. As an example, the `Checkbox` widget's boolean `value` property may be true or false, based on which the appropriate box is shown. For this to not be hardcoded, we need a variable to hold that state. State can generally be classified into two types.
+
+Local state is relevant within a portion of the app, and we use `setState` to manage these state variables, we don't need to store this anywhere for the entire app. These variables are generally within a stateful widget that is deep in the widget tree and rebuilds are not costly, as well as the variable doesn't need to be passed anywhere.
+
+But when a change in a lower level widget needs to affect higher level ones, or vice versa, we need the upper level to keep track of the state. This means that the widget sitting upper in the tree has to be a stateful widget, and any widget below it can be stateless because its state is already being managed from higher up in the tree.
+
+A `StatefulWidget` is an immutable configuration object, while its associated `State` object holds mutable state. Calling `setState()` updates the State object and marks the associated element as needing a rebuild. Flutter then rebuilds the relevant widget subtree using the updated state.
+
+#### Callbacks in Dart
+
+Since we can't pass information directly from a child to a parent, we can define a function in the parent and pass it to the child as a callback, which the child can trigger with some parameter, and that parameter can then be used by the parent. In our app, we do it to pass the state of the checkbox to the task tile widget so that it can trigger a `setState`.
+
+#### ListView builder
+
+> Documentation: [https://api.flutter.dev/flutter/widgets/ListView/ListView.builder.html]
+
+This is a constructor for the `ListView` widget that requires the `itemBuilder` property which takes two parameters: context (where the widget is in the tree) and index (of the iterable to build the listview items from). `ListView.builder` is useful for displaying long or dynamically sized lists. It lazily builds its child widgets as they are needed during scrolling, rather than constructing every item immediately. The `itemBuilder` callback receives the BuildContext and index, while `itemCount` specifies the number of items and helps Flutter calculate the list's scroll extent.
+
+#### Lifting State Up
+
+A general principle is to move shared state to the lowest common ancestor of the widgets that need it, then pass the state/modifiers (callbacks) from there.
+
+#### Design Patterns and Architecture
+
+Design patterns and architectural approaches help organize complex applications by defining responsibilities and relationships between components. MVC is one example, separating an application into Model, View and Controller responsibilities. Flutter uses a declarative UI model: widgets describe the interface for a given state, and the framework updates the rendered interface when that state changes. There are several ways to manage state, including setState, ValueNotifier, ChangeNotifier, Provider, Bloc, Redux and MobX. The appropriate approach depends on application complexity, project requirements and developer familiarity.
+
+#### Provider
+
+> PubDev Page: [https://pub.dev/packages/provider]
+
+Using `setState` or the `Lifting State Up` design pattern in larger projects is error prone because of having to manage memory for stateful widgets, and take care in their lifecycle, alongside memoryless stateless widgets. Provider is a community-maintained package that wraps Flutter's InheritedWidget mechanism, simplifying how objects and state are exposed to descendants. It offers resource lifecycle management, lazy creation, and convenient ways to access and listen to provided values. It is completely in-memory state management, and doesn't save the data to disk, for which we need mechanisms like `shared_preferences` or databases.
+
+**Prop Drilling:** It describes passing data through multiple intermediate components or widgets that don't themselves need that data, simply so a deeper descendant can access it. The provider package simply lets us hoist the state up and a widget downstream can "listen" for a change in the state without going through any intermediate ones.
+
+Provier is actually a wrapper for [InheritedWidget](https://api.flutter.dev/flutter/widgets/InheritedWidget-class.html) that reduces boilerplate, simplifies resource allocation/deallocation, introduces lazy loading, and much more.
+
+#### Using Provider
+
+Since Provider is a package, we need to first include it as a dependency, then for the widget that must hold the state (i.e. the common widget), we wrap its child with a `Provider<T>` widget by defining a type. This widget needs a builder property that returns (exposes) the object or value. Now, any downstream widget that needs this data can use `Provider.of<T>(context)` to access the data provided and listen to any changes in the provided data. When we only need to change the data but not listen for changes or rebuild our widget in response to changes in data, we simply set the parameter `listen=false` inside `of`. This avoids rebuilding intermediate widgets, making it efficient. In newer versions, we can instead use `context.read<T>()` and `context.watch<T>()` to retrieve data without and with subscribing respectively. We can also subscribe to a part of the value with `context.select<T,R>()`.
+
+In order to change the state of the data, we create a class that extends `ChangeNotifier` (It is a class that provides notification mechanism) and that class is the data type taken by `ChangeNotifierProvider<T>` instead of normal Provider (it exposes a ChangeNotifier and listens to its notifications to rebuild dependent widgets), in its `create` property that takes a builder callback (used to be `builder` during course era but now deprecated). It automatically disposes the notifier it creates when the provider is removed from the widget tree. We then hold the data in a variable and also define a method to change the value of the data, inside which we call the method `notifyListeners()` that notifies registered listeners that the object's state has changed. The listening widgets can retrieve the data similarly with `of`.
+
+#### Consumer
+
+> Documentation: [https://pub.dev/documentation/provider/latest/provider/Consumer-class.html]
+> As long as a builder doesn't create a new context for its child, any descendants in the widget tree carry the same context as their parent.
+
+It is a class that wraps around a widget and inside the widget, allows using data from the provider without having to call `Provider.of()` every time. It does this with a `builder` property that takes a builder callback. The params we get are: a new context than the parent widget, the value stored in Provider, and the widget in the optional `child` property for the class. We can then return our widget within this callback and use the provider data parameter to access the provider data.
+
+The two main uses of Consumer:
+
+1. It supplies `BuildContext` to its builder, which can solve situations where the context we currently have is above the `Provider`.
+2. It creates a more localized rebuild scope, so a smaller part of the widget tree responds to changes.

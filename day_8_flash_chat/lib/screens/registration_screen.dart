@@ -86,7 +86,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   color: Color.fromARGB(255, 77, 141, 255),
                     onPressed: () async {
                       // To show the spinner, we need to set the variable to true
-                      setState() => _spin = true;
+                      setState (() => _spin = true);
 
                       // Since authentication is an asynchronous process that can also fail,
                       // We need to make this callback async, and also wrap it in a try-catch block
@@ -107,7 +107,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       } finally {
                         // Either signed in or failed, we must hide the spinner
                         // But we have to check if mounted before
-                        if (mounted) setState () => _spin = false;
+                        if (mounted) setState (() => _spin = false);
                       }
                     },
                     title: 'Register',

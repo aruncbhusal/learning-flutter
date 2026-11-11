@@ -1,31 +1,69 @@
-![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png)
-
-
 # Dicee 🎲
 
-## Our Goal
+A simple two-dice rolling app built as an introduction to adding functionality to Flutter applications.
 
-The objective of this tutorial is to introduce you to the core programming concepts that will form the foundation of most of the apps you’ll build in the future. This app will teach you how to make apps with functionality using setState() inside Stateful Flutter widgets.
+The idea is simple: tap either die and both dice roll. No separate roll button needed. The dice themselves do the job.
 
+## 🖼️ Preview
 
-## What you will create
+<p align="center">
+  <img src="../docs/media/day_4_dicee/demo.gif" height="420" alt="Dicee app demonstration">
+</p>
 
-We’re going to make a Las Vegas dice app. You can make the die roll at the press of a button. With this app in your pocket, you’ll be able to settle any score on the go!
+## 🎲 How It Works
 
-![Finished App](https://github.com/londonappbrewery/Images/blob/master/dicee-demo.gif)
+The app has two dice, each represented by an image asset corresponding to its current value (1–6).
 
-## What you will learn
+Both dice are initially set to `6`. Tapping either one triggers the same `handleButtonPressed()` function, which generates two independent random numbers and updates their values inside `setState()`.
 
-- How to use Flutter stateless widgets to design the user interface.
-- How to use Flutter stateful widgets to update the user interface.
-- How to change the properties of various widgets.
-- How to use onPressed listeners to detect when buttons are pressed.
-- How to use setState to mark the widget tree as dirty and requiring update on the next render.
-- How to use Expanded to make widgets adapt to screen dimensions.
-- Understand and use string interpolation.
-- Learn about basic dart programming concepts such as data types and functions.
-- Code and use gesture controls.
+```dart
+void handleButtonPressed() {
+  setState(() {
+    leftDiceNum = Random().nextInt(6) + 1;
+    rightDiceNum = Random().nextInt(6) + 1;
+  });
+}
+```
 
->This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
+The image paths are then constructed using string interpolation (`dice$leftDiceNum.png` and `dice$rightDiceNum.png`), so the appropriate dice faces are displayed whenever the state changes.
 
-![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
+## 🧩 Layout & Implementation
+
+The main screen is built around a `Row` containing two `TextButton` widgets. Rather than using conventional buttons, the dice images themselves are the clickable elements.
+
+A few things worth noting:
+
+- **StatefulWidget and setState:** The dice values are mutable state, so the page uses a `StatefulWidget`. Calling `setState()` notifies Flutter that the relevant widget subtree needs to be rebuilt.
+- **Random number generation:** Dart's `dart:math` library provides `Random().nextInt(6) + 1`, which generates an integer between 1 and 6 (inclusive).
+- **Expanded:** Both dice occupy equal portions of the available horizontal space. `Expanded` helps them adapt to the screen width instead of relying on fixed dimensions.
+- **Padding:** Adds spacing around each die, keeping the images from sitting directly against the screen edges.
+- **Image assets:** The two dice use slightly different constructors: `Image(image: AssetImage(...))` and `Image.asset(...)`. Both load local assets.
+
+This was also my first proper introduction to the difference between `StatelessWidget` and `StatefulWidget`, and how user interactions can trigger UI updates without manually rebuilding the entire application.
+
+## 🏃‍♂️ How To Run
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/aruncbhusal/learning-flutter.git
+cd learning-flutter/day_4_dicee
+```
+
+Install dependencies and run the app:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## 📚 References & Acknowledgements
+
+- [Dart Math Library](https://api.dart.dev/dart-math/)
+- [Expanded widget](https://api.flutter.dev/flutter/widgets/Expanded-class.html)
+- [Image widget](https://api.flutter.dev/flutter/widgets/Image-class.html)
+- [TextButton](https://api.flutter.dev/flutter/material/TextButton-class.html)
+
+Built while following [The Complete Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/) by Angela Yu.
+
+I created a fresh Flutter project for this exercise and copied over the relevant source files and assets, rather than using the original starter project directly, due to SDK/JDK compatibility issues.

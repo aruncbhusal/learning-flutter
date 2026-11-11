@@ -147,6 +147,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         });
                         // Once added, we can clear the message from the box
                       messageTextController.clear();
+                      messageText='';
                       } catch (e) {
                         if (!mounted) return;
                         ScaffoldMessenger.of(context).showSnackBar(

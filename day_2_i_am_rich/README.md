@@ -1,16 +1,37 @@
-# day_2_i_am_rich
+# I Am Rich
 
-I am rich parody app.
+A simple parody app built while getting started with Flutter. The app displays a diamond image alongside a minimal interface, using Flutter's Material widgets.
 
-## Getting Started
+## 🖼️ Preview
 
-This project is a starting point for a Flutter application.
+<p align="center">
+  <img src="../docs/media/day_2_iamrich/app.png" height="400" alt="I Am Rich app">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## 🧰 Concepts Practiced
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Basic Flutter application structure using `MaterialApp` and `Scaffold`
+- Using `AppBar` and other Material widgets to build an interface
+- Widget composition and layout using `Center`
+- Displaying local images using `Image` and `AssetImage`
+- Registering assets in `pubspec.yaml`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏃‍♂️ How To Run
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/aruncbhusal/learning-flutter.git
+cd learning-flutter/day_2_i_am_rich
+```
+
+Install dependencies and run the app:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## 📚 Acknowledgements
+
+Built while following [The Complete Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/) by Angela Yu.

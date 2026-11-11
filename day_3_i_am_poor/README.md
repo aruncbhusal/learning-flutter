@@ -1,16 +1,40 @@
-# day_3_i_am_poor
+# I Am Poor
 
-An app challenge from the course that demonstrates my poverty
+An app challenge from the course that demonstrates my poverty. It started as a simple image displayed in a `Scaffold`, which I later extended with a `Column` layout and a couple of messages.
 
-## Getting Started
+## 🖼️ Preview
 
-This project is a starting point for a Flutter application.
+<p align="center">
+  <img src="../docs/media/day_3_iampoor/app.png" height="400" alt="I Am Poor app">
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+## 🧰 Concepts Practiced
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Building layouts using `Column`, `Center` and `Expanded`
+- Displaying local images using `AssetImage`
+- Controlling image scaling with `BoxFit`
+- Styling widgets using Material colors and `TextStyle`
+- Understanding widget composition and layout hierarchy
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏃‍♂️ How To Run
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/aruncbhusal/learning-flutter.git
+cd learning-flutter/day_3_i_am_poor
+```
+
+Install dependencies and run the app:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## 📚 References
+
+- [Flutter UI documentation](https://docs.flutter.dev/ui)
+- [Column widget](https://api.flutter.dev/flutter/widgets/Column-class.html)
+
+Built while following [The Complete Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/) by Angela Yu.

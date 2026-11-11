@@ -24,10 +24,10 @@ flutter:
   fonts:
     - family: Quantico
       fonts:
-        - asset: fonts/Quantico-Regular.ttf
-        - asset: fonts/Quantico-Italic.ttf
+        - asset: fonts/Quantico/Quantico-Regular.ttf
+        - asset: fonts/Quantico/Quantico-Italic.ttf
           style: italic
-        - asset: fonts/Quantico-Bold.ttf
+        - asset: fonts/Quantico/Quantico-Bold.ttf
           weight: 700
 
     - family: Source Sans 3

@@ -1,30 +1,67 @@
-### Disclaimer
-
-> This git folder was initially cloned from AppBrewery's GitHub so that all assets, and starting code is obtained. The instructions in this README were followed alongside the course to complete this project.
-
-<!-- ![App Brewery Banner](https://github.com/londonappbrewery/Images/blob/master/AppBreweryBanner.png) -->
-
 # Mi Card
 
-## Our Goal
+A digital business card built as an exercise in Flutter UI development. The idea is fairly straightforward: display a profile, a short professional title, and contact details in a single screen.
 
-Now that you've seen how to create a Flutter app entirely from scratch, we're going to go further and learn more about how to design user interfaces for Flutter apps.
+This project was also where I started getting more comfortable with Flutter's layout system, custom fonts, and Material widgets.
 
-## What you will create
+## 🖼️ Preview
 
-Mi Card is a personal business card. Imagine every time you wanted to give someone your contact details or your business card but you didn't have it on you. Well, now you can get them to download your business card as an app.
+<p align="center">
+  <img src="../docs/media/day_3_mi_card/app.png" height="450" alt="Mi Card app preview">
+</p>
 
-## What you will learn
+## 🧱 Building the Layout
 
--   How to create Stateless Widgets
--   What is the difference between hot reload and hot refresh and running an app from cold
--   How to use Containers to lay out your UI
--   How to use Columns and Rows to position your UI elements
--   How to add custom fonts
--   How to add Material icons
--   How to style Text widgets
--   How to read and use Flutter Documentation
+The app is built around a `StatelessWidget`, with a `Scaffold` and `SafeArea` containing a vertically aligned `Column`.
 
-> This is a companion project to The App Brewery's Complete Flutter Development Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
+The layout consists of:
 
-![End Banner](https://github.com/londonappbrewery/Images/blob/master/readme-end-banner.png)
+- A `CircleAvatar` displaying a local profile image.
+- Text widgets for the name and professional title, styled with custom fonts.
+- Two contact cards displaying phone and email details, each with a Material icon.
+
+I initially built the contact sections manually using `Container`, `Row`, `Icon` and `Text` widgets. Later, I switched to `Card` and `ListTile`, which provided a cleaner way to achieve the same layout without manually arranging every element.
+
+The project also includes a `Divider` to separate the profile section from the contact details.
+
+## 🧪 Things I Explored
+
+This wasn't just about putting a few widgets on the screen. Some of the exercises and concepts covered along the way:
+
+- **Container:** Experimenting with dimensions, margins, padding and positioning.
+- **Row and Column:** Understanding main-axis and cross-axis alignment, spacing and widget composition. There's also a separate layout challenge preserved as commented code in `main.dart`.
+- **CircleAvatar:** Displaying a local image using `foregroundImage`.
+- **Text and TextStyle:** Customizing fonts, sizes, colors and weights. Also discovered that `toUpperCase()` saves us from manually typing uppercase text.
+- **Custom Fonts:** Registering and using `Quantico` and `Source Sans 3` through `pubspec.yaml`.
+- **Material Widgets:** Using `Card`, `ListTile`, `Padding`, `Divider` and Material icons instead of building everything from scratch.
+
+I also got introduced to hot reload and hot restart, and started getting into the habit of referring to Flutter's widget documentation rather than guessing available properties.
+
+> The phone number and email displayed in the app are placeholder values.
+
+## 🏃‍♂️ How To Run
+
+Clone the repository and navigate to the project directory:
+
+```bash
+git clone https://github.com/aruncbhusal/learning-flutter.git
+cd learning-flutter/day_3_mi_card_flutter
+```
+
+Install dependencies and run the app:
+
+```bash
+flutter pub get
+flutter run
+```
+
+## 📚 References & Acknowledgements
+
+- [Container](https://api.flutter.dev/flutter/widgets/Container-class.html)
+- [Row and Column](https://api.flutter.dev/flutter/widgets/Column-class.html)
+- [CircleAvatar](https://api.flutter.dev/flutter/material/CircleAvatar-class.html)
+- [Flutter's Custom Fonts guide](https://docs.flutter.dev/cookbook/design/fonts)
+
+The project was initially cloned from [App Brewery's](https://www.appbrewery.co/) starter repository to obtain the starting structure and assets. The implementation was then modified while following Angela Yu's [The Complete Flutter Development Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/).
+
+More detailed learning notes are available in [`notes.md`](../notes.md#day-3).

@@ -9,7 +9,7 @@ class WeatherModel {
   Future<dynamic> getCityWeather(city) async {
     // Since geocoding API has been retired, we need to make two API calls here, one to get latlong, then again to get weather request. How about we do this:
     // print('Looking for $city');
-    NetworkHelper networkHelper = NetworkHelper(url: 'http://api.openweathermap.org/geo/1.0/direct?q=$city&limit=1&appid=$OWA_API_KEY');
+    NetworkHelper networkHelper = NetworkHelper(url: 'https://api.openweathermap.org/geo/1.0/direct?q=$city&limit=1&appid=$OWA_API_KEY');
     var locationData = await networkHelper.getData();
     return await getLocationWeather(getLocation: false, lat: locationData[0]['lat'], long: locationData[0]['lon']);
   }

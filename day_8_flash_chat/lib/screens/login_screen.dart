@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen>{
                   color: Color.fromARGB(255, 77, 141, 255),
                     onPressed: () async {
                       // This was left as a challenge so let's just do it like the registration screen
-                      setState() => _spin = true;
+                      setState(() => _spin = true);
 
                       try{
                         // Since we simply perform the authentication, we don't really need to return anything
@@ -91,7 +91,7 @@ class _LoginScreenState extends State<LoginScreen>{
                             SnackBar(content: Text(e.message ?? "Login Failed"))
                         );
                       } finally {
-                        if (mounted) setState () => _spin = false;
+                        if (mounted) setState (() => _spin = false);
                       }
                     },
                     title: 'Log In',

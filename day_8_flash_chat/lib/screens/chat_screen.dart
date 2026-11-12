@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
-import 'package:day_8_flash_chat/constants.dart';
+import 'package:flash_chat/constants.dart';
 
 // Let's move firestore to global scope since multiple classes need it
 final _firestore = FirebaseFirestore.instance;

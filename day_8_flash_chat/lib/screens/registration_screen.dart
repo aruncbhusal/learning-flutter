@@ -1,6 +1,6 @@
-import 'package:day_8_flash_chat/components/rounded_button.dart';
-import 'package:day_8_flash_chat/constants.dart';
-import 'package:day_8_flash_chat/screens/chat_screen.dart';
+import 'package:flash_chat/components/rounded_button.dart';
+import 'package:flash_chat/constants.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 // In order to add the authentication feature, we need to import the authentication library
 import 'package:firebase_auth/firebase_auth.dart';

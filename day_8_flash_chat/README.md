@@ -127,28 +127,32 @@ lib/
 
 ## Firebase Setup
 
-The project currently includes Firebase configuration for Android and iOS. To connect it to your own Firebase project:
+This project requires its own Firebase configuration. No Firebase project configuration is included in this repository.
+
+To connect the application to your Firebase project:
 
 1. Create a Firebase project.
 2. Install the [Firebase CLI](https://firebase.google.com/docs/cli) and log in.
-3. Install FlutterFire CLI:
+3. Activate the FlutterFire CLI:
 
     ```bash
     dart pub global activate flutterfire_cli
     ```
 
-4. From the project directory, configure Firebase:
+4. From the root directory of your newly created Flutter project, run:
 
     ```bash
     flutterfire configure
     ```
+
+   Select the platforms you intend to use. FlutterFire generates the corresponding configuration, including `lib/firebase_options.dart`.
 
 5. In the Firebase Console, enable **Email/Password** under Authentication sign-in providers.
 6. Create a Cloud Firestore database.
 
 The app creates the `messages` collection automatically when the first message is sent.
 
-**Firestore security rules must also be configured.** The app expects authenticated users to be able to read and write messages, but the rules themselves are not included in this repository. Do not leave an unrestricted test-mode database deployed.
+**Firestore security rules must also be configured.** The application expects authenticated users to be able to read and write messages. Do not deploy an unrestricted test-mode database.
 
 Useful documentation:
 
@@ -167,21 +171,71 @@ Useful documentation:
 | `modal_progress_hud_nsn` | Modal loading indicator during asynchronous operations. |
 | `intl`                   | Message timestamp formatting.                           |
 
-## Running the Project
+## ♻️ Reusing This Project
 
-Clone the repository and navigate to the project directory:
+This directory contains the application's Dart source code and required assets. The platform-specific project scaffolding has intentionally been omitted to keep this repository focused on the application itself.
+
+To use this project, create a fresh Flutter application and copy the relevant source files and resources into it.
+
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/aruncbhusal/learning-flutter.git
-cd learning-flutter/day_8_flash_chat
 ```
 
-Install dependencies and run the app:
+### 2. Create a new Flutter project
+
+Navigate to the cloned repository and create a new Flutter application outside it:
+
+```bash
+cd learning-flutter
+flutter create --project-name flash_chat ../flash_chat
+```
+
+Use the package name specified by the `name` field in this project's `pubspec.yaml`. This keeps the existing `package:` imports valid without having to rename them manually.
+
+### 3. Copy the source code and assets
+
+Copy the contents of this project's `lib/` directory into the newly created application's `lib/` directory.
+
+Also copy any project-specific resource directories present in this folder, such as:
+
+- `images/`
+- `assets/`
+- `fonts/`
+
+Keep their directory names and relative paths unchanged, since the application may refer to them through its asset declarations.
+
+The new project's generated `lib/main.dart` will be replaced by this project's entry point. Its platform-specific folders and configuration should otherwise remain intact.
+
+### 4. Merge dependencies and asset declarations
+
+Open this project's `pubspec.yaml` and add the required entries to the corresponding sections of the new application's `pubspec.yaml`.
+
+In particular:
+
+- Add the required packages from `dependencies`.
+- Add any required development packages from `dev_dependencies`, if needed.
+- Merge the asset and font declarations under `flutter`.
+
+Do not replace the newly generated `pubspec.yaml` wholesale. Retain its project name, Dart SDK constraints, Flutter SDK dependency and other generated configuration.
+
+Do not copy this project's `pubspec.lock`. The new application should resolve its own dependencies.
+
+### 5. Configure and run
+
+Complete any additional setup described in this README, such as API keys, platform permissions or Firebase configuration.
+
+Then navigate to the newly created application and run:
 
 ```bash
 flutter pub get
 flutter run
 ```
+
+A connected device or configured emulator is required.
+
+**Note:** These project directories are source templates, not standalone Flutter applications. They are intended to be used as a starting point for a new project rather than run directly from this repository.
 
 A working Firebase configuration and an internet connection are required.
 

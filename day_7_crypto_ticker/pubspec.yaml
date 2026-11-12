@@ -1,5 +1,5 @@
 name: bitcoin_ticker
-description: A new Flutter application.
+description: Track the cryoto triad's fiat value.
 version: 1.0.0+1
 
 environment:

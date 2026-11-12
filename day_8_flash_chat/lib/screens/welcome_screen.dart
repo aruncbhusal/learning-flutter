@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:day_8_flash_chat/screens/login_screen.dart';
-import 'package:day_8_flash_chat/screens/registration_screen.dart';
-import 'package:day_8_flash_chat/components/rounded_button.dart';
+import 'package:flash_chat/screens/login_screen.dart';
+import 'package:flash_chat/screens/registration_screen.dart';
+import 'package:flash_chat/components/rounded_button.dart';
 
 
 class WelcomeScreen extends StatefulWidget {

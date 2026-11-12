@@ -1,5 +1,5 @@
-name: day_8_flash_chat
-description: 'A new Flutter project.'
+name: flash_chat
+description: 'Single group chat platform'
 
 version: 1.0.0+1
 

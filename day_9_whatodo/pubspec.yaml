@@ -1,5 +1,5 @@
 name: whatodo
-description: "A new Flutter project."
+description: "Be on top of your work (at least those you set in this session)."
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 

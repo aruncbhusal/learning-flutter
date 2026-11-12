@@ -10,6 +10,7 @@
 **/coverage/
 **/doc/api/
 **/generated_plugin_registrant.dart
+**/*.lock
 
 # Flutter project metadata generated locally
 **/.metadata
@@ -78,3 +79,7 @@ app.*.map.json
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+
+# Firebase platform configuration
+**/google-services.json
+**/GoogleService-Info.plist

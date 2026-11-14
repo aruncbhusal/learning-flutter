@@ -9,7 +9,13 @@
 
 This repository documents my journey learning Flutter and Dart through app-based exercises and mini-projects. The primary reference for this journey is Angela Yu's [The Complete Flutter Bootcamp with Dart](https://www.udemy.com/course/flutter-bootcamp-with-dart/) on Udemy.
 
-I started setting up Flutter on **November 14, 2025**, and have been working through the course one project at a time. Some projects follow the provided course structure, while others involve adapting the implementation to newer APIs, finding alternative packages, or building things from scratch.
+I initialized this repository on **November 12, 2025**, and began learning Flutter the following day. The initial enthusiasm carried me through several projects, from basic UI layouts to APIs and networking, before life, classes, and a rather hike-heavy couple of weeks got in the way. I left the course somewhere around the Crypto Ticker project and didn't return for nearly eleven months.
+
+On **October 24, 2026**, I finally picked it back up. What followed was a bit of rediscovery, a fair amount of wrestling with outdated course code and newer Flutter/Dart versions, and eventually the completion of the remaining projects. I finished the final project, WhaTodo, on **November 3, 2026**.
+
+So, this wasn't exactly a year of consistent Flutter development. It was more of a start, a long pause, and a deliberate attempt to pick things back up and see them through. Fittingly, my first and last commits ended up being exactly one year apart!
+
+Some projects follow the original course structure, while others involve adapting implementations to newer APIs, finding alternative packages, or building things from scratch.
 
 The repository also serves as a learning journal. The [`notes.md`](./notes.md) file contains my notes, explanations, discoveries, and useful documentation links. Each project has its own README with implementation details, screenshots, and things I learnt along the way.
 
@@ -26,10 +32,10 @@ I currently develop and test on Android. Although some projects include iOS-spec
 
 ## 📊 Progress Tracker
 
-- ![Progress](https://img.shields.io/badge/Course%20Progress-Day%209-blue)
-- ![Projects](https://img.shields.io/badge/Projects-13-brightgreen)
-- **Last Updated:** November 12, 2026
-- **Current Status:** Hibernation
+- ![Progress](https://img.shields.io/badge/Course%20Progress-Day%209-brightgreen)
+- ![Projects](https://img.shields.io/badge/Projects-13-blue)
+- **Last Updated:** November 15, 2026
+- **Current Status:** Course completed; repository archived for reference
 
 ## 🤯 Learning Progress
 
@@ -130,29 +136,32 @@ git clone https://github.com/aruncbhusal/learning-flutter.git
 Navigate to the cloned repository and create a new project outside it.
 
 For example, to use WhaTodo:
+
 ```bash
 cd learning-flutter
 flutter create --project-name whatodo ../my_whatodo
 ```
 
-Use the name value from the selected project's pubspec.yaml as the project name. This preserves the existing Dart package imports.
+Use the name value from the selected project's `pubspec.yaml` as the project name. This preserves the existing Dart package imports.
 
 ### 3. Copy the application source
 
-Copy the selected project's lib/ contents into the new project's lib/ directory.
+Copy the selected project's `lib/` contents into the new project's `lib/` directory.
 
-Also copy its resource directories, such as images/, assets/, and fonts/, if present.
+Also copy its resource directories, such as `images/`, `assets/`, and `fonts/`, if present.
 
 ### 4. Configure dependencies
 
-Refer to the selected project's pubspec.yaml and merge the required dependencies, asset declarations and font declarations into the newly generated manifest.
+Refer to the selected project's `pubspec.yaml` and merge the required dependencies, asset declarations and font declarations into the newly generated manifest.
 
 Do not replace the new project's manifest.
 
 ### 5. Complete project-specific setup
+
 Some applications require additional configuration, such as API keys, device permissions or Firebase setup. Refer to the individual project README for these instructions.
 
 ### 6. Run
+
 ```bash
 flutter pub get
 flutter run
@@ -168,15 +177,15 @@ To run another project, simply replace `day_9_whatodo` with the corresponding pr
 
 | Date | Event | Remarks |
 | --- | --- | --- |
-| 26 Kartik, 2082 (12/11/2025) | **Repository Created** | Initial commit. |
-| 28 Kartik, 2082 (14/11/2025) | **Started** | Day 0: began setting up Flutter and the development environment. |
-| 30 Kartik, 2082 (16/11/2025) | **First Batch** | Added the initial project files through Day 3. |
-| 13 Mangsir, 2082 (29/11/2025) | **Checkpoint** | Added Clima (Day 6). Last project update before the long break. |
-| 7 Kartik, 2083 (24/10/2026) | **Resumed** | Returned to the course with Crypto Ticker (Day 7). |
-| 11 Kartik, 2083 (28/10/2026) | **Checkpoint** | Added Flash Chat (Day 8). |
-| 17 Kartik, 2083 (3/11/2026) | **Checkpoint** | Added WhaTodo (Day 9). |
-| 25 Kartik, 2083 (11/11/2026) | **Updated** | README revisions and code fixes across the projects. |
-| 26 Kartik, 2083 (12/11/2026) | **Cleaned Up** | Removed generated platform scaffolding and reorganized the repository as reusable source templates. |
+| 12 November 2025 | **Repository Created** | Initial commit and project setup. |
+| 13 November 2025 | **Started** | Began learning Flutter and setting up the development environment. |
+| 16 November 2025 | **First Batch** | Added the initial project files through Day 3. |
+| 29 November 2025 | **Checkpoint** | Completed Clima (Day 6). The course then went on an extended break, with Crypto Ticker left unfinished. |
+| 10–12 October 2026 | **Rediscovered** | Revisited previous projects, recovered notes and refreshed concepts before resuming development. |
+| 24 October 2026 | **Resumed** | Returned to the course, revisiting Crypto Ticker (Day 7). |
+| 28 October 2026 | **Checkpoint** | Completed Flash Chat (Day 8). |
+| 3 November 2026 | **Completed** | Finished WhaTodo (Day 9), bringing the course projects to an end. |
+| 12 November 2026 | **Cleaned Up** | Final repository restructuring, code cleanup and documentation updates. |
 
 ## 📝 License
 
